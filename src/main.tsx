@@ -1,5 +1,5 @@
 import { createRoot } from "react-dom/client";
 import "./style.css";
-import Dashboard from "./pages/dashboard";
+import Register from "./pages/register";
 
-createRoot(document.getElementById("app")!).render(<Dashboard />);
+createRoot(document.getElementById("app")!).render(<Register />);
