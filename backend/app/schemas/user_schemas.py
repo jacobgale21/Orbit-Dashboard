@@ -10,6 +10,10 @@ class UserCreate(BaseModel):
     email: EmailStr = Field(..., format="email")
     password: SecretStr = Field(..., min_length=8)
 
+class UserLogin(BaseModel):
+    username: str = Field(..., min_length=3, max_length=50)
+    password: SecretStr = Field(..., min_length=8)
+
 class UserResponse(UserCreate):
     id: uuid.UUID
     is_active: bool

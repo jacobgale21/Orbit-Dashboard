@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { registerUser } from "../api";
+import { Link } from "react-router-dom";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -87,6 +88,15 @@ export default function Register() {
               className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-slate-900 placeholder:text-slate-400 outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
             />
           </div>
+          <p className="mt-6 text-center text-sm text-slate-600">
+            Have an account already?{" "}
+            <Link
+              to="/login"
+              className="font-medium text-slate-900 underline hover:no-underline"
+            >
+              Log in
+            </Link>
+          </p>
 
           {error && (
             <p
