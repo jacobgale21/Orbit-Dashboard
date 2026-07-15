@@ -14,10 +14,12 @@ export default function Login() {
     setError(null);
     setLoading(true);
     try {
-      await loginUser({ username, password });
+      const data = await loginUser({ username, password });
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("refresh_token", data.refresh_token);
+
       navigate("/");
-      // success: clear form or navigate
-    } catch {
+    } catch (error) {
       setError("Login failed");
     } finally {
       setLoading(false);

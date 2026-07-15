@@ -14,11 +14,16 @@ class UserLogin(BaseModel):
     username: str = Field(..., min_length=3, max_length=50)
     password: SecretStr = Field(..., min_length=8)
 
-class UserResponse(UserCreate):
+
+class UserResponse(BaseModel):
     id: uuid.UUID
+    username: str
+    email: EmailStr
     is_active: bool
     last_login: datetime.datetime | None
     created_at: datetime.datetime
     updated_at: datetime.datetime
-
     model_config = ConfigDict(from_attributes=True)
+
+class RefreshRequest(BaseModel):
+    refresh_token: str
