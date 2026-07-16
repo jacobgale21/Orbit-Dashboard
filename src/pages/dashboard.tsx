@@ -5,6 +5,7 @@ import NavBar from "../components/navBar";
 import HeroSection from "./hero";
 import FeaturedMissions from "./missions";
 import SolarSystemPlaceholder from "./solarsystem";
+import MissionTimelinePreview from "./timeline";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ export default function Dashboard() {
         <HeroSection />
         <FeaturedMissions />
         <SolarSystemPlaceholder />
+        <MissionTimelinePreview />
       </main>
     </div>
   );
