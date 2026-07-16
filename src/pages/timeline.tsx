@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Section } from "@/components/section";
 import { timeline } from "@/data/placeholder";
 
-export default function MissionTimelinePreview() {
+export default function MissionTimeline() {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   const scrollByAmount = (direction: "left" | "right") => {
@@ -18,14 +18,16 @@ export default function MissionTimelinePreview() {
 
   return (
     <Section id="timeline" className="bg-space-900/40">
-      <h2 className="mb-10 text-3xl font-semibold">Mission Timeline</h2>
+      <h2 className="mb-10 text-3xl text-center font-semibold">
+        Mission Timeline
+      </h2>
 
       <div className="relative mx-12">
         <button
           type="button"
           aria-label="Scroll timeline left"
           onClick={() => scrollByAmount("left")}
-          className="absolute -left-14 top-1/2 z-10 -translate-y-1/2"
+          className="absolute -left-12 top-1/2 z-10 -translate-y-1/2"
         >
           <ChevronLeft className="h-8 w-8" />
         </button>
