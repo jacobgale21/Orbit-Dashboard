@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser, type User } from "../api";
+import NavBar from "../components/navBar";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -19,10 +20,13 @@ export default function Dashboard() {
   }, [navigate]);
 
   return (
-    <main>
-      <h1>Orbit Dashboard</h1>
-      <p>Welcome, {currentUser?.username}</p>
-      {error && <p>{error}</p>}
-    </main>
+    <div className="min-h-screen bg-zinc-950 text-zinc-100">
+      <NavBar />
+
+      {/* Main grid */}
+      <main className="flex-1 p-6 grid grid-cols-12 gap-4">
+        {/* panels go here */}
+      </main>
+    </div>
   );
 }
