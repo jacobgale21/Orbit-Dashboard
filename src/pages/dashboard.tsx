@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCurrentUser, type User } from "../api";
 import NavBar from "../components/navBar";
+import HeroSection from "./hero";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -24,8 +25,9 @@ export default function Dashboard() {
       <NavBar />
 
       {/* Main grid */}
-      <main className="flex-1 p-6 grid grid-cols-12 gap-4">
+      <main>
         {/* panels go here */}
+        <HeroSection />
       </main>
     </div>
   );
