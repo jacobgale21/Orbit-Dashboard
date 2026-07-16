@@ -4,6 +4,7 @@ import { getCurrentUser, type User } from "../api";
 import NavBar from "../components/navBar";
 import HeroSection from "./hero";
 import FeaturedMissions from "./missions";
+import SolarSystemPlaceholder from "./solarsystem";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ export default function Dashboard() {
         {/* panels go here */}
         <HeroSection />
         <FeaturedMissions />
+        <SolarSystemPlaceholder />
       </main>
     </div>
   );
