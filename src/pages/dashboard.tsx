@@ -7,6 +7,7 @@ import FeaturedMissions from "./missions";
 import SolarSystemPlaceholder from "./solarsystem";
 import MissionTimeline from "./timeline";
 import CurrentMissions from "./currentMissions";
+import Discoveries from "./discoveries";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -36,6 +37,7 @@ export default function Dashboard() {
         <SolarSystemPlaceholder />
         <MissionTimeline />
         <CurrentMissions />
+        <Discoveries />
       </main>
     </div>
   );
