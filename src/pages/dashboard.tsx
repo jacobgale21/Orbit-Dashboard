@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getCurrentUser, type User } from "../api";
 import NavBar from "../components/navBar";
 import HeroSection from "./hero";
+import FeaturedMissions from "./missions";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export default function Dashboard() {
       <main>
         {/* panels go here */}
         <HeroSection />
+        <FeaturedMissions />
       </main>
     </div>
   );
