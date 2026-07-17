@@ -80,6 +80,24 @@ export interface UserLogin {
   password: string;
 }
 
+export interface Structure {
+  id: string;
+  name: string;
+  mass: {
+    massValue: number;
+    massExponent: number;
+  };
+  volume: {
+    volValue: number;
+    volExponent: number;
+  };
+  gravity: number;
+  escape: number;
+  temperature: number;
+  period: number;
+  distance: number;
+}
+
 export const registerUser = async (user: UserCreate) => {
   try {
     const response = await api.post("/register", user);
@@ -108,4 +126,35 @@ export const getCurrentUser = async (): Promise<User> => {
     console.error("Error getting current user:", error);
     throw error;
   }
+};
+
+export const getStructures = async (): Promise<Structure[]> => {
+  const { data } = await api.get<Structure[]>("/structures");
+  return data.map((s) => ({
+    id: s.id,
+    name: s.name,
+    mass: s.mass,
+    volume: s.volume,
+    gravity: s.gravity,
+    escape: s.escape,
+    temperature: s.temperature,
+    period: s.period,
+    distance: s.distance,
+  }));
+};
+export const getStructureByName = async (name: string): Promise<Structure> => {
+  const { data } = await api.get<Structure>(
+    `/structures/${encodeURIComponent(name)}`,
+  );
+  return {
+    id: data.id,
+    name: data.name,
+    mass: data.mass,
+    volume: data.volume,
+    gravity: data.gravity,
+    escape: data.escape,
+    temperature: data.temperature,
+    period: data.period,
+    distance: data.distance,
+  };
 };
