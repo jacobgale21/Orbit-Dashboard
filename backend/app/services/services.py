@@ -16,11 +16,8 @@ ph = PasswordHasher()
 security = HTTPBearer()
 # Create a new user when a user registers
 async def create_user(db: AsyncSession, user_in: UserCreate) -> UserResponse:
-
     try:
-
         existing_user = await db.execute(select(User).where((User.email == user_in.email) | (User.username == user_in.username)))
-
         if existing_user.scalar_one_or_none():
             raise HTTPException(status_code=400, detail="User already exists")
             

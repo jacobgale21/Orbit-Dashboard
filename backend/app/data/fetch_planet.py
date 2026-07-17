@@ -2,7 +2,11 @@ import requests
 import os
 from dotenv import load_dotenv
 import json
-from app.schemas.planet_schemas import StructureIngest
+from app.schemas.planet_schemas import StructureIngest, StructureOut
+from app.database import SessionLocal
+from app.models.structure_model import Structure
+from sqlalchemy import select
+import asyncio
 load_dotenv()
 
 
@@ -36,7 +40,7 @@ def fetch_structures():
                 planet_temp = response.json()[0]
             else:
                 print("Error:", response.status_code, response.text)
-            keys_planet = ["mass", "volume", "gravity","escape"]
+            keys_planet = ["mass", "vol", "gravity","escape"]
             keys_ninja = ["name", "period", "temperature", "distance_light_year"]
             combined_dict = {
                 **{k: planet[k] for k in keys_planet if k in planet},
@@ -44,11 +48,45 @@ def fetch_structures():
             }
             item = StructureIngest.model_validate(combined_dict)
             result_list.append(item)
-       
+        # print(result_list)
         return result_list
     except requests.exceptions.RequestException as e:
         print(f"Error fetching structures: {e}")
         return None
 
+async def store_structures(result_list):
+    try:
+        async with SessionLocal() as session:
+            for item in result_list:
+                existing = await session.execute(
+                    select(Structure).where(Structure.name == item.name)
+                )
+                if existing.scalar_one_or_none():
+                    continue
 
-    
+                new_planet = Structure(name=item.name, mass=item.mass, volume=item.vol, gravity=item.gravity, escape=item.escape, temperature=item.temperature, period=item.period, distance=item.distance_light_year)
+                session.add(new_planet)
+
+            await session.commit()
+                
+    except Exception as e:
+        print(f"Error storing structures: {e}")
+        return None
+
+async def get_structures():
+    try:
+        async with SessionLocal() as session:
+            structures = await session.execute(select(Structure))
+            return structures.scalars().all()
+    except Exception as e:
+        print(f"Error getting structures: {e}")
+        return None
+
+
+if __name__ == "__main__":
+    # result_list = fetch_structures()
+    # if result_list:
+    #     asyncio.run(store_structures(result_list))
+    structures = asyncio.run(get_structures())
+    for structure in structures:
+        print(StructureOut.model_validate(structure).model_dump_json())
