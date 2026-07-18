@@ -96,6 +96,11 @@ export interface Structure {
   temperature: number;
   period: number;
   distance: number;
+  image_url: string | null;
+  type_planet: string | null;
+  glow: string | null;
+  tagline: string | null;
+  fact: string | null;
 }
 
 export const registerUser = async (user: UserCreate) => {
@@ -140,6 +145,11 @@ export const getStructures = async (): Promise<Structure[]> => {
     temperature: s.temperature,
     period: s.period,
     distance: s.distance,
+    image_url: s.image_url,
+    type_planet: s.type_planet,
+    glow: s.glow,
+    tagline: s.tagline,
+    fact: s.fact,
   }));
 };
 export const getStructureByName = async (name: string): Promise<Structure> => {
@@ -156,5 +166,10 @@ export const getStructureByName = async (name: string): Promise<Structure> => {
     temperature: data.temperature,
     period: data.period,
     distance: data.distance,
+    image_url: data.image_url,
+    type_planet: data.type_planet,
+    glow: data.glow,
+    tagline: data.tagline,
+    fact: data.fact,
   };
 };

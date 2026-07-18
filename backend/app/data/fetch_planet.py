@@ -82,11 +82,95 @@ async def get_structures():
         print(f"Error getting structures: {e}")
         return None
 
+async def get_images():
+    try: 
+        image_urls = {
+            "Mars": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN0Gjajlb0cuAuDDoUJ1_fPj9-7e3dTt3xQqeTV-9PLQ&s=10",
+            "Mercury": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBPp4RT04cro_m6iGZXoZ1WIS81z6RZMztL8nIBKxIAijHHTy_CTbTCno&s=10",
+        }
+        async with SessionLocal() as session:
+            for name, url in image_urls.items():
+                result = await session.execute(
+                    select(Structure).where(Structure.name == name)
+                )
+                structure = result.scalar_one_or_none()
+                if structure is None:
+                    continue
+                structure.image_url = url
+            await session.commit()
+    except Exception as e:
+        print(f"Error getting images: {e}")
+        return None
+
+async def add_data():
+    try:
+        new_data = {
+            "Mercury": {
+                "type_planet": "Terrestrial",
+                "glow": "#a8a29e",
+                "tagline": "Scorched and swift",
+                "fact": "A Mercury day lasts longer than its year.",
+            },
+            "Venus": {
+                "type_planet": "Terrestrial",
+                "glow": "#f59e0b",
+                "tagline": "Earth's veiled twin",
+                "fact": "Venus spins backwards relative to most planets.",
+            },
+            "Earth": {
+                "type_planet": "Terrestrial",
+                "glow": "#38bdf8",
+                "tagline": "Our blue harbor",
+                "fact": "The only known world with liquid water at the surface.",
+            },
+            "Mars": {
+                "type_planet": "Terrestrial",
+                "glow": "#ef4444",
+                "tagline": "The red frontier",
+                "fact": "Olympus Mons is the tallest volcano in the solar system.",
+            },
+            "Jupiter": {
+                "type_planet": "Gas Giant",
+                "glow": "#fbbf24",
+                "tagline": "King of storms",
+                "fact": "The Great Red Spot is a storm larger than Earth.",
+            },
+            "Saturn": {
+                "type_planet": "Gas Giant", 
+                "glow": "#fcd34d",
+                "tagline": "Lord of the rings",
+                "fact": "Saturn is less dense than water — it would float in a giant bathtub.",
+            },
+            "Uranus": {
+                "type_planet": "Ice Giant",
+                "glow": "#67e8f9",
+                "tagline": "The sideways world",
+                "fact": "Uranus rotates on its side, tilted nearly 98°.",
+            },
+            "Neptune": {
+                "type_planet": "Ice Giant",
+                "glow": "#6366f1",
+                "tagline": "The distant wind",
+                "fact": "Neptune hosts the fastest winds in the solar system.",
+            },
+        }
+        async with SessionLocal() as session:
+            for name, data in new_data.items():
+                result = await session.execute(
+                    select(Structure).where(Structure.name == name)
+                )
+                structure = result.scalar_one_or_none()
+                if structure is None:
+                    continue
+                structure.type_planet = data["type_planet"]
+                structure.glow = data["glow"]
+                structure.tagline = data["tagline"]
+                structure.fact = data["fact"]
+            await session.commit()
+    except Exception as e:
+        print(f"Error adding data: {e}")
+        return None
+
 
 if __name__ == "__main__":
-    # result_list = fetch_structures()
-    # if result_list:
-    #     asyncio.run(store_structures(result_list))
-    structures = asyncio.run(get_structures())
-    for structure in structures:
-        print(StructureOut.model_validate(structure).model_dump_json())
+    asyncio.run(add_data())

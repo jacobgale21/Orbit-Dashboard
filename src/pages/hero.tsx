@@ -4,9 +4,6 @@ import { Button } from "@/components/ui/button";
 export default function HeroSection() {
   return (
     <section className="relative flex min-h-[92vh] items-center overflow-hidden px-6 pt-16">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_#1e3a8a_0%,_#030712_55%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,_rgba(59,130,246,0.25),_transparent_40%)]" />
-
       <div className="relative mx-auto max-w-6xl">
         <p className="mb-4 text-sm uppercase tracking-[0.25em] text-accent-soft">
           Deep space exploration

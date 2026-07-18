@@ -30,4 +30,9 @@ class Structure(Base):
     temperature: Mapped[float | None] = mapped_column(Float, nullable=True)
     period: Mapped[float | None] = mapped_column(Float, nullable=True)
     distance: Mapped[float | None] = mapped_column(Float, nullable=True)  # light years
+    image_url: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    type_planet: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    glow: Mapped[str | None] = mapped_column(String(100), nullable=True)
+    tagline: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    fact: Mapped[str | None] = mapped_column(String(255), nullable=True)
     # atmosphere / resources later when you have data

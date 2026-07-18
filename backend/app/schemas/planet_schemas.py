@@ -23,4 +23,9 @@ class StructureOut(BaseModel):
     temperature: float | None = None
     period: float | None = None
     distance: float | None = None
+    image_url: str | None = None
+    type_planet: str | None = None
+    glow: str | None = None
+    tagline: str | None = None
+    fact: str | None = None
     model_config = ConfigDict(from_attributes=True)
