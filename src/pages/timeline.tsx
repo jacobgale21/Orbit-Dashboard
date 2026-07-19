@@ -17,10 +17,12 @@ export default function MissionTimeline() {
   };
 
   return (
-    <Section id="timeline" className="bg-space-900/40">
-      <h2 className="mb-10 text-3xl text-center font-semibold">
-        Mission Timeline
-      </h2>
+    <Section id="timeline">
+      <header className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+        <h2 className="mt-5 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
+          Mission Timeline
+        </h2>
+      </header>
 
       <div className="relative mx-12">
         <button
@@ -45,15 +47,21 @@ export default function MissionTimeline() {
         >
           <ol className="flex min-w-max items-center gap-0">
             {timeline.map((item, i) => (
-              <li key={item} className="flex items-center">
-                <div className="flex w-36 flex-col items-center gap-3">
+              <li key={item.name} className="flex items-center">
+                <div className="flex w-40 flex-col items-center gap-2 px-1">
                   <span className="h-3 w-3 rounded-full bg-accent shadow-[0_0_12px_rgba(59,130,246,0.8)]" />
-                  <span className="text-center text-sm text-white/80">
-                    {item}
+                  <span className="font-mono text-xs text-accent-soft">
+                    {item.year}
+                  </span>
+                  <span className="text-center text-sm font-medium text-white/90">
+                    {item.name}
+                  </span>
+                  <span className="text-center text-[11px] leading-snug text-white/50">
+                    {item.summary}
                   </span>
                 </div>
                 {i < timeline.length - 1 && (
-                  <div className="mb-8 h-px w-16 bg-white/20" />
+                  <div className="mb-10 h-px w-16 bg-white/20" />
                 )}
               </li>
             ))}
