@@ -173,3 +173,14 @@ export const getStructureByName = async (name: string): Promise<Structure> => {
     fact: data.fact,
   };
 };
+
+export interface Mission {
+  id: string;
+  name: string;
+  description: string;
+  destination: string;
+  year: string;
+  status: string;
+  details: { [key: string]: string };
+  impact: string;
+}
