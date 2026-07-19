@@ -1,55 +1,76 @@
-import { Section } from "@/components/section";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { statuses } from "@/data/placeholder";
+import { Card, CardContent } from "@/components/ui/card";
+import type { Mission } from "@/api";
+import { placeholderMissions } from "@/data/placeholder";
 
+const filteredMissions = placeholderMissions.filter(
+  (mission: Mission) =>
+    mission.name === "Voyager 1" ||
+    mission.name === "Perseverance" ||
+    mission.name === "Europa Clipper",
+);
 export default function CurrentMissions() {
   return (
-    <Section id="current-missions">
-      <div className="mb-10">
-        <h2 className="text-3xl font-semibold tracking-tight">
-          Current Missions
-        </h2>
-        <p className="mt-2 text-white/55">
-          Live status snapshots from active deep-space programs.
-        </p>
-      </div>
+    <section className="relative overflow-hidden bg-transparent py-16 text-slate-100 sm:py-24">
+      <div className="pointer-events-none absolute inset-0 opacity-60"></div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {statuses.map((status) => (
-          <Card
-            key={status.name}
-            className="border-white/10 bg-space-900/80 shadow-xl shadow-black/20 transition hover:-translate-y-0.5 hover:border-accent/40"
+      <div className="relative mx-auto max-w-7xl px-6">
+        <header className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+          <h2 className="mt-5 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
+            Active Missions
+          </h2>
+          <p className="mt-4 text-pretty text-sm text-slate-400 sm:text-base">
+            Active missions currently in operation.
+          </p>
+        </header>
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {filteredMissions.map((mission: Mission) => (
+            <MissionCard key={mission.name} mission={mission} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+function MissionCard({ mission }: { mission: Mission }) {
+  return (
+    <Card className="group relative overflow-hidden border-white/10 bg-white/[0.03] p-0 text-slate-100 backdrop-blur-xl transition-all duration-500 hover:border-white/20 hover:bg-white/[0.05]">
+      <div className="pointer-events-none absolute inset-0 opacity-50 transition-opacity duration-500 group-hover:opacity-80" />
+
+      <CardContent className="relative flex flex-col gap-4 p-5 sm:p-6">
+        {/* Header row only */}
+        <div className="flex items-start justify-between gap-3">
+          <div>
+            <h3 className="text-lg font-semibold tracking-tight text-white sm:text-xl">
+              {mission.name}
+            </h3>
+            <p className="text-xs text-slate-400 sm:text-sm">
+              {mission.destination}
+            </p>
+          </div>
+          <Badge
+            variant="outline"
+            className="shrink-0 border-white/15 bg-white/5 text-[10px] uppercase tracking-wider text-slate-300"
           >
-            <CardHeader className="space-y-3">
-              <div className="flex items-start justify-between gap-3">
-                <CardTitle className="text-lg text-white">
-                  {status.name}
-                </CardTitle>
-                <Badge className="bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/15">
-                  {status.status}
-                </Badge>
-              </div>
-            </CardHeader>
+            {mission.status}
+          </Badge>
+        </div>
 
-            <CardContent className="space-y-4">
-              <div>
-                <p className="text-xs uppercase tracking-[0.18em] text-white/40">
-                  Distance
-                </p>
-                <p className="mt-1 text-sm text-white/80">{status.distance}</p>
-              </div>
+        <dl className="grid grid-cols-3 gap-2 text-center text-[11px] sm:text-xs">
+          {Object.entries(mission.details).map(([label, value]) => (
+            <div key={label} className="border-b border-white/5 pb-2">
+              <dt className="text-[11px] uppercase tracking-wider text-slate-500">
+                {label}
+              </dt>
+              <dd className="mt-0.5 font-medium text-slate-100">{value}</dd>
+            </div>
+          ))}
+        </dl>
 
-              <div className="border-t border-white/10 pt-4">
-                <p className="text-xs uppercase tracking-[0.18em] text-white/40">
-                  Mission phase
-                </p>
-                <p className="mt-1 text-sm text-white/80">{status.phase}</p>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
-    </Section>
+        <p className="border-l-2 border-white/20 pl-3 text-xs italic text-slate-400">
+          {mission.impact}
+        </p>
+      </CardContent>
+    </Card>
   );
 }

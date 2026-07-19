@@ -183,4 +183,6 @@ export interface Mission {
   status: string;
   details: { [key: string]: string };
   impact: string;
+  distance: string;
+  phase: string;
 }

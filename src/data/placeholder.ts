@@ -18,6 +18,8 @@ export const placeholderMissions: Mission[] = [
     },
     impact:
       "First human-made object to enter interstellar space and return data from beyond the solar wind.",
+    distance: "24.3B km",
+    phase: "Interstellar cruise",
   },
   {
     id: "voyager-2",
@@ -34,6 +36,8 @@ export const placeholderMissions: Mission[] = [
     },
     impact:
       "Completed the Grand Tour and remains the only probe to visit the ice giants up close.",
+    distance: "24.3B km",
+    phase: "Interstellar cruise",
   },
   {
     id: "perseverance",
@@ -50,6 +54,8 @@ export const placeholderMissions: Mission[] = [
     },
     impact:
       "Caching Mars rock cores and flying Ingenuity, the first powered aircraft on another planet.",
+    distance: "225M km",
+    phase: "Surface ops",
   },
   {
     id: "curiosity",
@@ -65,6 +71,8 @@ export const placeholderMissions: Mission[] = [
       Phase: "Surface ops",
     },
     impact: "Confirmed Mars once had conditions suitable for microbial life.",
+    distance: "225M km",
+    phase: "Surface ops",
   },
   {
     id: "europa-clipper",
@@ -81,6 +89,8 @@ export const placeholderMissions: Mission[] = [
     },
     impact:
       "Will map Europa's ocean and ice to guide the search for habitability in the outer solar system.",
+    distance: "480M km",
+    phase: "Outbound",
   },
   {
     id: "jwst",
@@ -97,6 +107,8 @@ export const placeholderMissions: Mission[] = [
     },
     impact:
       "Delivered the deepest infrared views of the cosmos and transformed exoplanet atmosphere science.",
+    distance: "1.5M km",
+    phase: "Orbiting Earth",
   },
 ];
 
@@ -109,27 +121,6 @@ export const timeline = [
   "Curiosity",
   "James Webb",
   "Europa Clipper",
-];
-
-export const statuses = [
-  {
-    name: "Voyager 1",
-    status: "Nominal",
-    distance: "24.3B km",
-    phase: "Interstellar cruise",
-  },
-  {
-    name: "Perseverance",
-    status: "Nominal",
-    distance: "225M km",
-    phase: "Surface ops",
-  },
-  {
-    name: "Europa Clipper",
-    status: "Cruise",
-    distance: "480M km",
-    phase: "Outbound",
-  },
 ];
 
 export type Discovery = {
