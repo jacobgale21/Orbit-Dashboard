@@ -104,9 +104,10 @@ function PlanetCard({
             {structure.image_url ? (
               <PlanetViewer textureUrl={structure.image_url} />
             ) : (
-              <div className="flex h-full w-full items-center justify-center rounded-full border border-white/10 bg-white/5 text-xs text-slate-500">
-                No texture
-              </div>
+              <PlanetViewer
+                textureUrl={`./src/images/${structure.name}_texture.jpg`}
+                isUrl={false}
+              />
             )}
           </div>
         </div>
