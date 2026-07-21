@@ -176,13 +176,33 @@ export const getStructureByName = async (name: string): Promise<Structure> => {
 
 export interface Mission {
   id: string;
+  external_id: string;
   name: string;
-  description: string;
-  destination: string;
-  year: string;
-  status: string;
-  details: { [key: string]: string };
-  impact: string;
-  distance: string;
-  phase: string;
+  image_url: string | null;
+  thumbnail_url: string | null;
+  status: string | null;
+  launch_date: string | null;
+  description: string | null;
+  agency: string | null;
+  rocket: string | null;
+  destination: string | null;
+  launch_site: string | null;
 }
+
+export const getMissions = async (): Promise<Mission[]> => {
+  const { data } = await api.get<Mission[]>("/missions");
+  return data.map((m) => ({
+    id: m.id,
+    external_id: m.external_id,
+    name: m.name,
+    description: m.description,
+    destination: m.destination,
+    launch_date: m.launch_date,
+    status: m.status,
+    agency: m.agency,
+    rocket: m.rocket,
+    launch_site: m.launch_site,
+    image_url: m.image_url,
+    thumbnail_url: m.thumbnail_url,
+  }));
+};

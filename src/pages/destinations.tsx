@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { getStructures } from "@/api";
 import { useEffect, useState } from "react";
 import type { Structure } from "@/api";
-import { PlanetViewer } from "@/components/globe";
+import { LazyPlanetViewer } from "@/components/globe";
 
 function formatMass(structure: Structure) {
   if (!structure.mass) return "—";
@@ -102,9 +102,9 @@ function PlanetCard({
           />
           <div className="relative h-full w-full">
             {structure.image_url ? (
-              <PlanetViewer textureUrl={structure.image_url} />
+              <LazyPlanetViewer textureUrl={structure.image_url} />
             ) : (
-              <PlanetViewer
+              <LazyPlanetViewer
                 textureUrl={`./src/images/${structure.name}_texture.jpg`}
                 isUrl={false}
               />

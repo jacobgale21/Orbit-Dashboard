@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers import router_auth
 from app.routers import router_planet
+from app.routers import router_missions
 app = FastAPI()
 
 
@@ -16,3 +17,4 @@ app.add_middleware(
 app.include_router(router_auth.router)
 
 app.include_router(router_planet.router)
+app.include_router(router_missions.router)

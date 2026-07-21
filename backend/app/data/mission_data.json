@@ -1,0 +1,80 @@
+[
+  {
+    "external_id": "e3df2ecd-c239-472f-95e4-2b89b4f75800",
+    "name": "Sputnik 1",
+    "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/sputnik_8k74ps_image_20210830185541.jpg",
+    "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193923.jpeg",
+    "status": "Launch Successful",
+    "launch_date": "1957-10-04T19:28:34Z",
+    "description": "First artificial satellite consisting of a 58 cm pressurized aluminium shell containing two 1 W transmitters for a total mass of 83.6 kg.",
+    "agency": "Soviet Space Program",
+    "rocket": "Sputnik 8K74PS",
+    "destination": "Earth",
+    "launch_site": "Baikonur Cosmodrome, Republic of Kazakhstan"
+  },
+  {
+    "external_id": "aed29ce0-d4e3-4177-b286-d186c7b21354",
+    "name": "Apollo 11",
+    "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/saturn2520v_image_20190222030036.jpeg",
+    "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193845.jpeg",
+    "status": "Launch Successful",
+    "launch_date": "1969-07-16T13:32:00Z",
+    "description": "Apollo 11 was commanded by Neil Armstrong, Command Module Pilot Michael Collins and Lunar Module Pilot Edwin \"Buzz\" E. Aldrin. The Mission was to complete the goal that President John F. Kennedy set on May 25, 1961 to land a man on the moon and return the crew back to Earth. On July 20,1969 Neil Armstrong and Buzz Aldrin landed there Lunar Module on the sea of tranquility this marked the first time a human has set foot upon another celestial body.",
+    "agency": "National Aeronautics and Space Administration",
+    "rocket": "Saturn V",
+    "destination": "Earth",
+    "launch_site": "Kennedy Space Center, FL, USA"
+  },
+  {
+    "external_id": "b992f5a6-9a9f-4af1-9ebd-7ee2dd6047c8",
+    "name": "Voyager 1",
+    "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/titan2520iii_image_20190222030055.jpeg",
+    "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193942.jpeg",
+    "status": "Launch Successful",
+    "launch_date": "1977-09-05T12:56:01Z",
+    "description": "Voyager 1 is a space probe launched by NASA on September 5, 1977. Part of the Voyager program to study the outer Solar System, Voyager 1 launched 16 days after its twin, Voyager 2.",
+    "agency": "Lockheed Martin",
+    "rocket": "Titan IIIE",
+    "destination": "Earth",
+    "launch_site": "Cape Canaveral SFS, FL, USA"
+  },
+  {
+    "external_id": "75414835-ec0a-43f4-b624-1636502312f3",
+    "name": "Voyager 2",
+    "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/titan2520iii_image_20190222030055.jpeg",
+    "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193942.jpeg",
+    "status": "Launch Successful",
+    "launch_date": "1977-08-20T14:29:44Z",
+    "description": "Voyager 2 is a space probe launched by NASA on August 20, 1977, to study the outer planets. Part of the Voyager program, it was launched 16 days before its twin, Voyager 1, on a trajectory that took longer to reach Jupiter and Saturn but enabled further encounters with Uranus and Neptune. It is the only spacecraft to have visited either of the ice giants.",
+    "agency": "Lockheed Martin",
+    "rocket": "Titan IIIE",
+    "destination": "Earth",
+    "launch_site": "Cape Canaveral SFS, FL, USA"
+  },
+  {
+    "external_id": "9d2a03ff-1fb2-4519-bcdb-ba9f84e61d3d",
+    "name": "STS-31 (Hubble)",
+    "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/space_shuttle_image_20230422074810.jpeg",
+    "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__imagpeg",
+    "status": "Launch Successful",
+    "launch_date": "1990-04-24T12:33:51Z",
+    "description": "STS-31 was the thirty-fifth mission of the space shuttle program. Discovery's tenth mission deployed the Hubble Space Telescope.",
+    "agency": "Lockheed Space Operations Company",
+    "rocket": "Space Shuttle",
+    "destination": "Earth",
+    "launch_site": "Kennedy Space Center, FL, USA"
+  },
+  {
+    "external_id": "16e4908a-564a-4019-89a9-0d64ee4caaaa",
+    "name": "Titan IVB/Centaur | Cassini-Huygens",
+    "image_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/titan2520ivb_image_20190222030244.jpeg",
+    "thumbnail_url": "https://thespacedevs-prod.nyc3.digitaloceanspaces.com/media/images/255bauto255d__image_thumbnail_20240305193945.jpeg",
+    "status": "Launch Successful",
+    "launch_date": "1997-10-15T08:43:01Z",
+    "description": "Cassini-Huygens was a joint NASA/ESA mission to study Saturn and its moons. It was launched on October 15, 1997 and arrived at Saturn on July 1, 2004. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in detail. It was the first spacecraft to study Saturn and its moons in",
+    "agency": "Lockheed Martin",
+    "rocket": "Titan IVB/Centaur",
+    "destination": "Saturn",
+    "launch_site": "Cape Canaveral SFS, FL, USA"
+  }
+]

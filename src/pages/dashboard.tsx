@@ -32,30 +32,33 @@ export default function Dashboard() {
 
       {/* Main grid */}
       <main className="relative min-h-screen overflow-hidden bg-[#05060d] text-slate-100">
+        {/* backgrounds — behind everything */}
         <div
-          className="absolute inset-0"
+          className="pointer-events-none absolute inset-0 z-0"
           style={{
             background:
               "radial-gradient(ellipse at 20% 10%, rgba(88,101,242,0.25), transparent 55%), radial-gradient(ellipse at 80% 90%, rgba(236,72,153,0.18), transparent 55%), radial-gradient(ellipse at 50% 50%, rgba(14,165,233,0.1), transparent 70%)",
           }}
         />
-
-        {/* panels go here */}
-        <HeroSection />
-        <FeaturedMissions />
-        <SolarSystemPlaceholder />
-        <MissionTimeline />
-        <CurrentMissions />
-        <Discoveries />
-        <Destinations />
         <div
-          className="absolute inset-0"
+          className="pointer-events-none absolute inset-0 z-0 opacity-70"
           style={{
             backgroundImage:
               "radial-gradient(1px 1px at 25% 30%, rgba(255,255,255,0.7), transparent), radial-gradient(1px 1px at 75% 60%, rgba(255,255,255,0.55), transparent), radial-gradient(1.5px 1.5px at 40% 80%, rgba(255,255,255,0.5), transparent), radial-gradient(1px 1px at 10% 65%, rgba(255,255,255,0.4), transparent), radial-gradient(1.5px 1.5px at 90% 15%, rgba(255,255,255,0.6), transparent)",
             backgroundSize: "600px 600px",
           }}
         />
+
+        {/* page content above backgrounds */}
+        <div className="relative z-10">
+          <HeroSection />
+          <FeaturedMissions />
+          <SolarSystemPlaceholder />
+          <MissionTimeline />
+          <CurrentMissions />
+          <Discoveries />
+          <Destinations />
+        </div>
       </main>
     </div>
   );

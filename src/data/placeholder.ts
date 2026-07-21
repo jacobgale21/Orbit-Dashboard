@@ -2,115 +2,115 @@ import type { LucideIcon } from "lucide-react";
 import { Sun, Orbit, Activity, Radio, Globe, Telescope } from "lucide-react";
 import type { Mission } from "@/api";
 // src/data/placeholders.ts
-export const placeholderMissions: Mission[] = [
-  {
-    id: "voyager-1",
-    name: "Voyager 1",
-    description:
-      "NASA's farthest spacecraft, now exploring interstellar space beyond the heliosphere.",
-    destination: "Interstellar Space",
-    year: "1977",
-    status: "Active",
-    details: {
-      Agency: "NASA",
-      Distance: "24.3B km",
-      Phase: "Interstellar cruise",
-    },
-    impact:
-      "First human-made object to enter interstellar space and return data from beyond the solar wind.",
-    distance: "24.3B km",
-    phase: "Interstellar cruise",
-  },
-  {
-    id: "voyager-2",
-    name: "Voyager 2",
-    description:
-      "The only spacecraft to fly by Uranus and Neptune, now on an interstellar trajectory.",
-    destination: "Interstellar Space",
-    year: "1977",
-    status: "Active",
-    details: {
-      Agency: "NASA",
-      Flybys: "Jupiter → Saturn → Uranus → Neptune",
-      Phase: "Interstellar cruise",
-    },
-    impact:
-      "Completed the Grand Tour and remains the only probe to visit the ice giants up close.",
-    distance: "24.3B km",
-    phase: "Interstellar cruise",
-  },
-  {
-    id: "perseverance",
-    name: "Perseverance",
-    description:
-      "Mars rover searching for signs of ancient life and collecting samples for future return.",
-    destination: "Mars",
-    year: "2020",
-    status: "Active",
-    details: {
-      Agency: "NASA / JPL",
-      Distance: "225M km",
-      Phase: "Surface ops",
-    },
-    impact:
-      "Caching Mars rock cores and flying Ingenuity, the first powered aircraft on another planet.",
-    distance: "225M km",
-    phase: "Surface ops",
-  },
-  {
-    id: "curiosity",
-    name: "Curiosity",
-    description:
-      "Long-running Mars Science Laboratory rover studying Gale Crater's habitability.",
-    destination: "Mars",
-    year: "2011",
-    status: "Active",
-    details: {
-      Agency: "NASA / JPL",
-      Landing: "Gale Crater",
-      Phase: "Surface ops",
-    },
-    impact: "Confirmed Mars once had conditions suitable for microbial life.",
-    distance: "225M km",
-    phase: "Surface ops",
-  },
-  {
-    id: "europa-clipper",
-    name: "Europa Clipper",
-    description:
-      "Mission to assess Europa's ice shell and subsurface ocean as a potential habitat.",
-    destination: "Jupiter / Europa",
-    year: "2024",
-    status: "En Route",
-    details: {
-      Agency: "NASA",
-      Distance: "480M km",
-      Phase: "Outbound",
-    },
-    impact:
-      "Will map Europa's ocean and ice to guide the search for habitability in the outer solar system.",
-    distance: "480M km",
-    phase: "Outbound",
-  },
-  {
-    id: "jwst",
-    name: "James Webb Space Telescope",
-    description:
-      "Infrared observatory studying the early universe, exoplanets, and star formation from L2.",
-    destination: "L2",
-    year: "2021",
-    status: "Active",
-    details: {
-      Agency: "NASA / ESA / CSA",
-      Orbit: "Sun–Earth L2",
-      Wavelength: "Infrared",
-    },
-    impact:
-      "Delivered the deepest infrared views of the cosmos and transformed exoplanet atmosphere science.",
-    distance: "1.5M km",
-    phase: "Orbiting Earth",
-  },
-];
+// export const placeholderMissions: Mission[] = [
+//   {
+//     id: "voyager-1",
+//     name: "Voyager 1",
+//     description:
+//       "NASA's farthest spacecraft, now exploring interstellar space beyond the heliosphere.",
+//     destination: "Interstellar Space",
+//     year: "1977",
+//     status: "Active",
+//     details: {
+//       Agency: "NASA",
+//       Distance: "24.3B km",
+//       Phase: "Interstellar cruise",
+//     },
+//     impact:
+//       "First human-made object to enter interstellar space and return data from beyond the solar wind.",
+//     distance: "24.3B km",
+//     phase: "Interstellar cruise",
+//   },
+//   {
+//     id: "voyager-2",
+//     name: "Voyager 2",
+//     description:
+//       "The only spacecraft to fly by Uranus and Neptune, now on an interstellar trajectory.",
+//     destination: "Interstellar Space",
+//     year: "1977",
+//     status: "Active",
+//     details: {
+//       Agency: "NASA",
+//       Flybys: "Jupiter → Saturn → Uranus → Neptune",
+//       Phase: "Interstellar cruise",
+//     },
+//     impact:
+//       "Completed the Grand Tour and remains the only probe to visit the ice giants up close.",
+//     distance: "24.3B km",
+//     phase: "Interstellar cruise",
+//   },
+//   {
+//     id: "perseverance",
+//     name: "Perseverance",
+//     description:
+//       "Mars rover searching for signs of ancient life and collecting samples for future return.",
+//     destination: "Mars",
+//     year: "2020",
+//     status: "Active",
+//     details: {
+//       Agency: "NASA / JPL",
+//       Distance: "225M km",
+//       Phase: "Surface ops",
+//     },
+//     impact:
+//       "Caching Mars rock cores and flying Ingenuity, the first powered aircraft on another planet.",
+//     distance: "225M km",
+//     phase: "Surface ops",
+//   },
+//   {
+//     id: "curiosity",
+//     name: "Curiosity",
+//     description:
+//       "Long-running Mars Science Laboratory rover studying Gale Crater's habitability.",
+//     destination: "Mars",
+//     year: "2011",
+//     status: "Active",
+//     details: {
+//       Agency: "NASA / JPL",
+//       Landing: "Gale Crater",
+//       Phase: "Surface ops",
+//     },
+//     impact: "Confirmed Mars once had conditions suitable for microbial life.",
+//     distance: "225M km",
+//     phase: "Surface ops",
+//   },
+//   {
+//     id: "europa-clipper",
+//     name: "Europa Clipper",
+//     description:
+//       "Mission to assess Europa's ice shell and subsurface ocean as a potential habitat.",
+//     destination: "Jupiter / Europa",
+//     year: "2024",
+//     status: "En Route",
+//     details: {
+//       Agency: "NASA",
+//       Distance: "480M km",
+//       Phase: "Outbound",
+//     },
+//     impact:
+//       "Will map Europa's ocean and ice to guide the search for habitability in the outer solar system.",
+//     distance: "480M km",
+//     phase: "Outbound",
+//   },
+//   {
+//     id: "jwst",
+//     name: "James Webb Space Telescope",
+//     description:
+//       "Infrared observatory studying the early universe, exoplanets, and star formation from L2.",
+//     destination: "L2",
+//     year: "2021",
+//     status: "Active",
+//     details: {
+//       Agency: "NASA / ESA / CSA",
+//       Orbit: "Sun–Earth L2",
+//       Wavelength: "Infrared",
+//     },
+//     impact:
+//       "Delivered the deepest infrared views of the cosmos and transformed exoplanet atmosphere science.",
+//     distance: "1.5M km",
+//     phase: "Orbiting Earth",
+//   },
+// ];
 
 export type TimelineEvent = {
   name: string;

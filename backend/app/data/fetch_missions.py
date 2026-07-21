@@ -4,84 +4,112 @@ from dotenv import load_dotenv
 from sqlalchemy import select
 import asyncio
 from app.database import SessionLocal
+from pathlib import Path
+import json
+from app.models.mission_model import Mission
+import datetime
 
 load_dotenv()
-# async def fetch_missions():
-#     try:
-#         MISSION_NAMES = [
-#         "Sputnik 1",
-#         "Apollo 11",
-#         "Voyager 1",
-#         "Voyager 2",
-#         "Hubble Space Telescope",
-#         "Cassini",
-#         "Curiosity",
-#         "James Webb Space Telescope",
-#         "Europa Clipper",
-#         "Perseverance",
-#         ]
+async def fetch_missions():
+   try:
+      MISSION_NAMES = [{"name": "Curiosity", "ID": "2011-070"}, {"name": "James Webb Space Telescope", "ID": "2021-130"}, {"name": "Europa Clipper", "ID": "2024-182"}, {"name": "Perseverance", "ID": "2020-052"}]
         
+      result_list = []
 
-#         result_list = []
+      for mission in MISSION_NAMES:
+            response = requests.get(
+                os.getenv("MISSION_API_URL"),
+                params={
+                    "launch_designator": mission["ID"],
+                    "limit": 1
+                }
+            )
+            
+            if not response.ok:
+                print(mission["name"], response.status_code, response.text)
+                continue
 
-#         for mission_name in MISSION_NAMES:
-#             response = requests.get(
-#                 os.getenv("MISSION_API_URL"),
-#                 params={
-#                     "search": mission_name,
-#                     "limit": 1
-#                 }
-#             )
-#             print(response.json())
-#             if not response.ok:
-#                 print(mission_name, response.status_code, response.text)
-#                 continue
+            data = response.json()
 
-#             data = response.json()
+            if not data.get("results"):
 
-#             if not data.get("results"):
-#                 continue
+                continue
+            launch = data["results"][0]
 
-#             launch = data["results"][0]
+            mission = {
+               "external_id": launch.get("id"),
+               "name": (launch.get("mission") or {}).get("name") or launch.get("name"),
 
-#             mission = {
-#                 "external_id": launch.get("id"),
-#                 "name": launch.get("mission", {}).get("name") or launch.get("name"),
-#                 "slug": launch.get("slug"),
+               "image_url": (launch.get("image") or {}).get("image_url"),
+               "thumbnail_url": (launch.get("image") or {}).get("thumbnail_url"),
 
-#                 "image_url": launch.get("image", {}).get("image_url"),
-#                 "thumbnail_url": launch.get("image", {}).get("thumbnail_url"),
-#                 "image_credit": launch.get("image", {}).get("credit"),
-#                 "image_license": launch.get("image", {}).get("license", {}).get("name"),
+               "status": (launch.get("status") or {}).get("name"),
+               "launch_date": launch.get("net"),
+               "description": (launch.get("mission") or {}).get("description"),
 
-#                 "status": launch.get("status", {}).get("name"),
-#                 "launch_date": launch.get("net"),
-#                 "description": launch.get("mission", {}).get("description"),
+               "agency": (launch.get("launch_service_provider") or {}).get("name"),
+               "rocket": (
+                  ((launch.get("rocket") or {}).get("configuration") or {}).get("full_name")
+               ),
+               "destination": (
+                  (
+                        ((launch.get("mission") or {}).get("orbit") or {}).get("celestial_body")
+                        or {}
+                  ).get("name")
+               ),
+               "launch_site": (
+                  ((launch.get("pad") or {}).get("location") or {}).get("name")
+               ),
+            }
+            out_path = Path(__file__).with_name("missions_result.json")
+            out_path.write_text(json.dumps(mission, indent=2, default=str), encoding="utf-8")
+            print(f"Saved mission to {out_path}")
+            result_list.append(mission)
+      return result_list
+   except Exception as e:
+        print(f"Error fetching missions: {e}")
+        return None
 
-#                 "agency": launch.get("launch_service_provider", {}).get("name"),
-#                 "rocket": launch.get("rocket", {})
-#                                 .get("configuration", {})
-#                                 .get("full_name"),
-
-#                 "destination": launch.get("mission", {})
-#                                     .get("orbit", {})
-#                                     .get("celestial_body", {})
-#                                     .get("name"),
-
-#                 "launch_site": launch.get("pad", {})
-#                                     .get("location", {})
-#                                     .get("name"),
-#             }
-
-#             result_list.append(mission)
-
-#         return result_list
-    
-#     except Exception as e:
-#         print(f"Error fetching missions: {e}")
-#         return None
+async def store_missions(result_list = None, mission_data_path = None):
+    try:
+      async with SessionLocal() as session:
+         if result_list:
+            for mission in result_list:
+               existing = await session.execute(
+                  select(Mission).where(Mission.name == mission.name)
+               )
+               if existing.scalar_one_or_none():
+                  continue
+               new_mission = Mission(name=mission.name, image_url=mission.image_url, thumbnail_url=mission.thumbnail_url, status=mission.status, launch_date=mission.launch_date, description=mission.description, agency=mission.agency, rocket=mission.rocket, destination=mission.destination, launch_site=mission.launch_site)
+               session.add(new_mission)
+            await session.commit()
+         elif mission_data_path:
+            with open(mission_data_path, "r") as file:
+               mission_data = json.load(file)
+            for mission in mission_data:
+               existing = await session.execute(
+                  select(Mission).where(Mission.name == mission['name'])
+               )
+               if existing.scalar_one_or_none():
+                  continue
+               new_mission = Mission(external_id=mission['external_id'], 
+                  name=mission['name'], 
+                  image_url=mission['image_url'], 
+                  thumbnail_url=mission['thumbnail_url'], 
+                  status=mission['status'], 
+                  launch_date=datetime.datetime.strptime(mission['launch_date'], "%Y-%m-%dT%H:%M:%SZ"), 
+                  description=mission['description'], 
+                  agency=mission['agency'], 
+                  rocket=mission['rocket'], 
+                  destination=mission['destination'],
+                  launch_site=mission['launch_site']
+               )
+               session.add(new_mission)
+            await session.commit()
+    except Exception as e:
+        print(f"Error storing missions: {e}")
+        return None
 
 
 if __name__ == "__main__":
-   print(asyncio.run(fetch_missions()))
-
+   print(asyncio.run(store_missions(mission_data_path=Path(__file__).with_name("mission_data.json"))))

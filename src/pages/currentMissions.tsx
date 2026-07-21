@@ -1,15 +1,16 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Mission } from "@/api";
-import { placeholderMissions } from "@/data/placeholder";
+import { getMissions } from "@/api";
+import { useState, useEffect } from "react";
 
-const filteredMissions = placeholderMissions.filter(
-  (mission: Mission) =>
-    mission.name === "Voyager 1" ||
-    mission.name === "Perseverance" ||
-    mission.name === "Europa Clipper",
-);
 export default function CurrentMissions() {
+  const [missions, setMissions] = useState<Mission[]>([]);
+  useEffect(() => {
+    getMissions().then((missions) => {
+      setMissions(missions);
+    });
+  }, []);
   return (
     <section className="relative overflow-hidden bg-transparent py-16 text-slate-100 sm:py-24">
       <div className="pointer-events-none absolute inset-0 opacity-60"></div>
@@ -24,7 +25,7 @@ export default function CurrentMissions() {
           </p>
         </header>
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredMissions.map((mission: Mission) => (
+          {missions.map((mission: Mission) => (
             <MissionCard key={mission.name} mission={mission} />
           ))}
         </div>
@@ -57,18 +58,26 @@ function MissionCard({ mission }: { mission: Mission }) {
         </div>
 
         <dl className="grid grid-cols-3 gap-2 text-center text-[11px] sm:text-xs">
-          {Object.entries(mission.details).map(([label, value]) => (
-            <div key={label} className="border-b border-white/5 pb-2">
-              <dt className="text-[11px] uppercase tracking-wider text-slate-500">
-                {label}
-              </dt>
-              <dd className="mt-0.5 font-medium text-slate-100">{value}</dd>
-            </div>
-          ))}
+          <div className="border-b border-white/5 pb-2">
+            <dt className="text-[11px] uppercase tracking-wider text-slate-500">
+              Launch Date
+            </dt>
+            <dd className="mt-0.5 font-medium text-slate-100">
+              {mission.launch_date}
+            </dd>
+          </div>
+          <div className="border-b border-white/5 pb-2">
+            <dt className="text-[11px] uppercase tracking-wider text-slate-500">
+              Launch Site
+            </dt>
+            <dd className="mt-0.5 font-medium text-slate-100">
+              {mission.launch_site}
+            </dd>
+          </div>
         </dl>
 
         <p className="border-l-2 border-white/20 pl-3 text-xs italic text-slate-400">
-          {mission.impact}
+          {mission.description?.slice(0, 100)}...
         </p>
       </CardContent>
     </Card>
