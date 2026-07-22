@@ -1,9 +1,41 @@
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { SolarMapCanvas } from "@/components/solar-map-canvas";
-
+import { TimelineControls, MAX_DAYS } from "@/components/timeline-control";
 export default function Simulator() {
+  const [simTimeDays, setSimTimeDays] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const [speed, setSpeed] = useState(30); // days per real second
+  // keep latest values in refs so rAF loop stays stable
+  const playingRef = useRef(playing);
+  const speedRef = useRef(speed);
+  const timeRef = useRef(simTimeDays);
+  playingRef.current = playing;
+  speedRef.current = speed;
+  timeRef.current = simTimeDays;
+  useEffect(() => {
+    let frame = 0;
+    let last = performance.now();
+    const tick = (now: number) => {
+      const dt = (now - last) / 1000; // seconds
+      last = now;
+      if (playingRef.current) {
+        let next = timeRef.current + speedRef.current * dt;
+        if (next >= MAX_DAYS) {
+          next = MAX_DAYS;
+          setPlaying(false); // stop after one year
+        }
+        timeRef.current = next;
+        setSimTimeDays(next);
+      }
+      frame = requestAnimationFrame(tick);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, []);
   return (
     <div className="relative min-h-screen bg-[#05060d] text-slate-100">
+      {/* header ... */}
       <header className="absolute inset-x-0 top-0 z-20 flex items-center justify-between border-b border-white/10 bg-[#05060d]/80 px-6 py-3 backdrop-blur-md">
         <div className="flex items-center gap-4">
           <Link
@@ -21,9 +53,16 @@ export default function Simulator() {
       </header>
 
       <div className="grid h-screen grid-cols-1 pt-12 lg:grid-cols-[1fr_320px]">
-        {/* Map takes remaining height */}
-        <div className="relative min-h-0">
-          <SolarMapCanvas />
+        <div className="relative min-h-0 pb-24">
+          <SolarMapCanvas tDays={simTimeDays} />
+          <TimelineControls
+            simTimeDays={simTimeDays}
+            setSimTimeDays={setSimTimeDays}
+            playing={playing}
+            setPlaying={setPlaying}
+            speed={speed}
+            setSpeed={setSpeed}
+          />
         </div>
 
         {/* Side panel placeholder — fill in later */}

@@ -4,16 +4,15 @@ import * as THREE from "three";
 
 /** Visual layout only — not true scale */
 const PLANETS = [
-  { name: "Mercury", a: 4, color: "#a8a29e" },
-  { name: "Venus", a: 6, color: "#f59e0b" },
-  { name: "Earth", a: 8, color: "#38bdf8" },
-  { name: "Mars", a: 10, color: "#ef4444" },
-  { name: "Jupiter", a: 14, color: "#fbbf24" },
-  { name: "Saturn", a: 18, color: "#fcd34d" },
-  { name: "Uranus", a: 22, color: "#67e8f9" },
-  { name: "Neptune", a: 26, color: "#6366f1" },
+  { name: "Mercury", a: 4, periodDays: 88, color: "#a8a29e", phase: 0.2 },
+  { name: "Venus", a: 6, periodDays: 225, color: "#f59e0b", phase: 1.1 },
+  { name: "Earth", a: 8, periodDays: 365, color: "#38bdf8", phase: 0.0 },
+  { name: "Mars", a: 10, periodDays: 687, color: "#ef4444", phase: 2.0 },
+  { name: "Jupiter", a: 14, periodDays: 4333, color: "#fbbf24", phase: 0.5 },
+  { name: "Saturn", a: 18, periodDays: 10759, color: "#fcd34d", phase: 3.0 },
+  { name: "Uranus", a: 22, periodDays: 30687, color: "#67e8f9", phase: 1.5 },
+  { name: "Neptune", a: 26, periodDays: 60190, color: "#6366f1", phase: 4.0 },
 ];
-
 function OrbitRing({ radius }: { radius: number }) {
   const points = [];
   for (let i = 0; i <= 64; i++) {
@@ -41,17 +40,31 @@ function Sun() {
   );
 }
 
+function positionOnOrbit(
+  a: number,
+  periodDays: number,
+  tDays: number,
+  phase = 0,
+) {
+  const theta = phase + (2 * Math.PI * tDays) / periodDays;
+  return { x: a * Math.cos(theta), z: a * Math.sin(theta) };
+}
+
 function PlanetMarker({
   a,
   color,
-  angle = 0.4,
+  periodDays,
+  tDays,
+  phase = 0,
 }: {
   a: number;
   color: string;
-  angle?: number;
+  periodDays: number;
+  tDays: number;
+  phase?: number;
 }) {
-  const x = Math.cos(angle) * a;
-  const z = Math.sin(angle) * a;
+  const { x, z } = positionOnOrbit(a, periodDays, tDays, phase);
+
   return (
     <mesh position={[x, 0, z]}>
       <sphereGeometry args={[0.35, 16, 16]} />
@@ -60,7 +73,7 @@ function PlanetMarker({
   );
 }
 
-function Scene() {
+function Scene({ tDays }: { tDays: number }) {
   return (
     <>
       <color attach="background" args={["#05060d"]} />
@@ -70,7 +83,13 @@ function Scene() {
       {PLANETS.map((p) => (
         <group key={p.name}>
           <OrbitRing radius={p.a} />
-          <PlanetMarker a={p.a} color={p.color} />
+          <PlanetMarker
+            a={p.a}
+            color={p.color}
+            periodDays={p.periodDays}
+            tDays={tDays}
+            phase={p.phase}
+          />
         </group>
       ))}
       <OrbitControls
@@ -84,7 +103,7 @@ function Scene() {
   );
 }
 
-export function SolarMapCanvas() {
+export function SolarMapCanvas({ tDays }: { tDays: number }) {
   return (
     <div className="h-full w-full">
       <Canvas
@@ -92,7 +111,7 @@ export function SolarMapCanvas() {
         dpr={[1, 1.5]}
         gl={{ antialias: true, powerPreference: "high-performance" }}
       >
-        <Scene />
+        <Scene tDays={tDays} />
       </Canvas>
     </div>
   );
