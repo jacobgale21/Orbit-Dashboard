@@ -4,6 +4,7 @@ import "./style.css";
 import Register from "./pages/register";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
+import Simulator from "./pages/simulator";
 
 createRoot(document.getElementById("app")!).render(
   <BrowserRouter>
@@ -11,6 +12,7 @@ createRoot(document.getElementById("app")!).render(
       <Route path="/register" element={<Register />} />
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Dashboard />} />
+      <Route path="/simulator" element={<Simulator />} />
     </Routes>
   </BrowserRouter>,
 );
