@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Van Allen Radiation Belts",
+    "subtitle": "Earth's Invisible Shields",
+    "year": "1958",
+    "icon": "Shield",
+    "color": "#ef4444",
+    "glow": "#f87171",
+    "description": "Explorer 1 and Explorer 3 revealed two toroidal zones of trapped charged particles around Earth — the Van Allen belts — reshaping how we understand near-Earth space.",
+    "impact": "Defined the radiation environment spacecraft and astronauts must survive in orbit.",
+    "details": {
+      "Pioneer": "James Van Allen",
+      "Mission": "Explorer 1 / 3",
+      "Finding": "Trapped particle belts"
+    }
+  },
+  {
+    "title": "Solar Wind",
+    "subtitle": "A Continuous Stream from the Sun",
+    "year": "1959",
+    "icon": "Wind",
+    "color": "#f59e0b",
+    "glow": "#fbbf24",
+    "description": "Luna 1 and later Mariner 2 confirmed that the Sun emits a steady flow of plasma — the solar wind — that fills the heliosphere and drives space weather.",
+    "impact": "Explains auroras, comet tails, and how solar storms can disrupt technology on Earth.",
+    "details": {
+      "Confirmed": "Mariner 2 (1962)",
+      "Nature": "Supersonic plasma flow",
+      "Effect": "Shapes planetary magnetospheres"
+    }
+  },
+  {
+    "title": "Heliospheric Cosmic Rays",
+    "subtitle": "Intensity Beyond the Bubble",
+    "year": "2012",
+    "icon": "Atom",
+    "color": "#a855f7",
+    "glow": "#c084fc",
+    "description": "Voyager 1 crossed the heliopause and measured a sharp rise in galactic cosmic-ray intensity — direct proof it had left the Sun's protective bubble.",
+    "impact": "Mapped the edge of the heliosphere and how the Sun shields the solar system from cosmic radiation.",
+    "details": {
+      "Mission": "Voyager 1",
+      "Boundary": "Heliospause",
+      "Signal": "Cosmic-ray jump"
+    }
+  },
+  {
+    "title": "Lunar & Martian Water Ice",
+    "subtitle": "Ice in the Inner Solar System",
+    "year": "2008–2018",
+    "icon": "Droplets",
+    "color": "#38bdf8",
+    "glow": "#7dd3fc",
+    "description": "Missions from Chandrayaan-1 and LCROSS to Mars orbiters and polar landers confirmed water ice at the lunar poles and widespread ice on Mars — locked in soil, glaciers, and shadowed craters.",
+    "impact": "Transformed plans for in-situ resources, habitability studies, and future human outposts.",
+    "details": {
+      "Moon": "Polar crater ice",
+      "Mars": "Subsurface & polar ice",
+      "Use": "Life support / fuel potential"
+    }
+  },
+  {
+    "title": "Microgravity & Human Biology",
+    "subtitle": "How Space Remakes the Body",
+    "year": "Ongoing",
+    "icon": "HeartPulse",
+    "color": "#14b8a6",
+    "glow": "#2dd4bf",
+    "description": "Decades of ISS research show that long-duration microgravity drives bone loss, muscle atrophy, fluid shifts, immune changes, and vision issues — and that exercise and countermeasures can blunt many effects.",
+    "impact": "Sets the medical baseline for deep-space crew health on trips to the Moon and Mars.",
+    "details": {
+      "Platform": "ISS / Skylab / Mir",
+      "Effects": "Bone, muscle, vision",
+      "Countermeasure": "Exercise + monitoring"
+    }
+  }
+]

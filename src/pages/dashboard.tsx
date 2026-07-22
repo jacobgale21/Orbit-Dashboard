@@ -4,7 +4,6 @@ import { getCurrentUser, type User } from "../api";
 import NavBar from "../components/navBar";
 import HeroSection from "./hero";
 import FeaturedMissions from "./missions";
-import SolarSystemPlaceholder from "./solarsystem";
 import MissionTimeline from "./timeline";
 import CurrentMissions from "./currentMissions";
 import Discoveries from "./discoveries";
@@ -23,7 +22,6 @@ export default function Dashboard() {
         setError("Session expired");
         navigate("/login");
       });
-    console.log(localStorage.getItem("refresh_token"));
   }, [navigate]);
 
   return (
@@ -53,7 +51,6 @@ export default function Dashboard() {
         <div className="relative z-10">
           <HeroSection />
           <FeaturedMissions />
-          <SolarSystemPlaceholder />
           <MissionTimeline />
           <CurrentMissions />
           <Discoveries />

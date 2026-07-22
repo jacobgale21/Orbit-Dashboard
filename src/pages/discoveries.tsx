@@ -1,10 +1,36 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { discoveries, type Discovery } from "@/data/placeholder";
 import { Badge } from "@/components/ui/badge";
+import { getDiscoveries, type Discovery } from "@/api";
+import { useEffect, useState } from "react";
+import {
+  Shield,
+  Wind,
+  Atom,
+  Droplets,
+  HeartPulse,
+  type LucideIcon,
+} from "lucide-react";
+
+const ICONS: Record<string, LucideIcon> = {
+  Shield,
+  Wind,
+  Atom,
+  Droplets,
+  HeartPulse,
+};
 
 export default function Discoveries() {
+  const [discoveries, setDiscoveries] = useState<Discovery[]>([]);
+  useEffect(() => {
+    getDiscoveries().then((data) => {
+      setDiscoveries(data);
+    });
+  }, []);
   return (
-    <section className="relative overflow-hidden bg-[#05060d] py-16 text-slate-100 sm:py-24">
+    <section
+      id="discoveries"
+      className="relative overflow-hidden bg-[#05060d] py-16 text-slate-100 sm:py-24"
+    >
       {/* subtle backdrop matching the solar system section */}
       <div className="pointer-events-none absolute inset-0 opacity-60">
         <div
@@ -29,7 +55,7 @@ export default function Discoveries() {
 
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {discoveries.map((discovery) => (
-            <DiscoveryCard key={discovery.title} discovery={discovery} />
+            <DiscoveryCard key={discovery.name} discovery={discovery} />
           ))}
         </div>
       </div>
@@ -38,7 +64,7 @@ export default function Discoveries() {
 }
 
 function DiscoveryCard({ discovery }: { discovery: Discovery }) {
-  const Icon = discovery.icon;
+  const Icon = (discovery.icon && ICONS[discovery.icon]) || Shield;
 
   return (
     <Card className="group relative overflow-hidden border-white/10 bg-white/[0.03] p-0 text-slate-100 backdrop-blur-xl transition-all duration-500 hover:border-white/20 hover:bg-white/[0.05]">
@@ -54,11 +80,11 @@ function DiscoveryCard({ discovery }: { discovery: Discovery }) {
           <div className="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5">
             <div
               className="absolute inset-0 rounded-xl opacity-40 blur-md"
-              style={{ backgroundColor: discovery.glow }}
+              style={{ backgroundColor: discovery.glow || undefined }}
             />
             <Icon
               className="relative h-6 w-6"
-              style={{ color: discovery.color }}
+              style={{ color: discovery.color || undefined }}
             />
           </div>
           <Badge
@@ -71,7 +97,7 @@ function DiscoveryCard({ discovery }: { discovery: Discovery }) {
 
         <div>
           <h3 className="text-lg font-semibold tracking-tight text-white sm:text-xl">
-            {discovery.title}
+            {discovery.name}
           </h3>
           <p className="text-xs text-slate-400 sm:text-sm">
             {discovery.subtitle}

@@ -10,7 +10,7 @@ from app.database import Base
 from app.models.user_models import User
 from app.models.structure_model import Structure
 from app.models.mission_model import Mission
-
+from app.models.discovery_model import Discovery
 load_dotenv()
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

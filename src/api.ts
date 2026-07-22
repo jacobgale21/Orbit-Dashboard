@@ -206,3 +206,30 @@ export const getMissions = async (): Promise<Mission[]> => {
     thumbnail_url: m.thumbnail_url,
   }));
 };
+export interface Discovery {
+  id: string;
+  name: string;
+  subtitle: string | null;
+  year: string | null;
+  icon: string | null;
+  color: string | null;
+  glow: string | null;
+  description: string | null;
+  impact: string | null;
+  details: { [key: string]: string };
+}
+export const getDiscoveries = async (): Promise<Discovery[]> => {
+  const { data } = await api.get<Discovery[]>("/discoveries");
+  return data.map((d) => ({
+    id: d.id,
+    name: d.name,
+    subtitle: d.subtitle,
+    year: d.year,
+    icon: d.icon,
+    color: d.color,
+    glow: d.glow,
+    description: d.description,
+    impact: d.impact,
+    details: d.details,
+  }));
+};

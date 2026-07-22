@@ -8,13 +8,15 @@ export default function HeroSection() {
         <p className="mb-4 text-sm uppercase tracking-[0.25em] text-accent-soft">
           Deep space exploration
         </p>
-        <h1 className="max-w-3xl text-4xl font-semibold tracking-tight text-white md:text-6xl md:leading-[1.05]">
-          Explore Humanity&apos;s Journey Beyond Earth
-        </h1>
-        <p className="mt-6 max-w-xl text-lg text-white/60">
-          An interactive platform for missions, spacecraft, destinations, and
-          discoveries across the Solar System — and into interstellar space.
-        </p>
+        <header className="mx-auto max-w-3xl">
+          <h1 className="mt-6 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-5xl font-semibold tracking-tight text-transparent sm:text-6xl">
+            Explore Humanity&apos;s Journey Beyond Earth
+          </h1>
+          <p className="mt-5 text-pretty text-base text-slate-400 sm:text-lg">
+            An interactive platform for missions, spacecraft, destinations, and
+            discoveries across the Solar System — and into interstellar space.
+          </p>
+        </header>
         <div className="mt-10 flex flex-wrap gap-3">
           <Button size="lg" className="bg-accent-soft hover:bg-accent-soft/20">
             <a href="#missions">Explore Missions</a>

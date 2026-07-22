@@ -14,7 +14,10 @@ export default function FeaturedMissions() {
     });
   }, []);
   return (
-    <section className="relative overflow-hidden bg-transparent py-16 text-slate-100 sm:py-24">
+    <section
+      id="missions"
+      className="relative overflow-hidden bg-transparent py-16 text-slate-100 sm:py-24"
+    >
       <div className="pointer-events-none absolute inset-0 opacity-60"></div>
 
       <div className="relative mx-auto max-w-7xl px-6">
