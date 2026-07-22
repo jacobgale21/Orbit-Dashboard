@@ -35,4 +35,7 @@ class Structure(Base):
     glow: Mapped[str | None] = mapped_column(String(100), nullable=True)
     tagline: Mapped[str | None] = mapped_column(String(255), nullable=True)
     fact: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    eccentricity: Mapped[float | None] = mapped_column(Float, nullable=True)
+    semimajoraxis: Mapped[float | None] = mapped_column(Float, nullable=True)
+    inclination: Mapped[float | None] = mapped_column(Float, nullable=True)
     # atmosphere / resources later when you have data

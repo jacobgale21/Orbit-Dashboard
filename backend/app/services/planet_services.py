@@ -1,4 +1,4 @@
-from app.schemas.planet_schemas import StructureOut
+from app.schemas.planet_schemas import StructureOut, OrbitData
 from app.database import SessionLocal
 from app.models.structure_model import Structure
 from sqlalchemy import select
@@ -21,3 +21,12 @@ async def get_structure_by_name(name: str) -> StructureOut:
     except Exception as e:
         print(f"Error getting structure: {e}")
         raise HTTPException(status_code=500, detail=f"Error getting structure: {e}")
+
+async def get_orbit_data() -> list[OrbitData]:
+    try:
+        async with SessionLocal() as session:
+            orbit_data = await session.execute(select(Structure))
+            return [OrbitData.model_validate(orbit_data) for orbit_data in orbit_data.scalars().all()]
+    except Exception as e:
+        print(f"Error getting orbit data: {e}")
+        raise HTTPException(status_code=500, detail=f"Error getting orbit data: {e}")

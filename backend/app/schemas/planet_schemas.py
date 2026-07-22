@@ -29,3 +29,13 @@ class StructureOut(BaseModel):
     tagline: str | None = None
     fact: str | None = None
     model_config = ConfigDict(from_attributes=True)
+
+class OrbitData(BaseModel):
+    id: uuid.UUID
+    name: str
+    semimajoraxis: float | None = None
+    eccentricity: float | None = None
+    inclination: float | None = None
+    glow: str | None = None
+    period: float | None = None
+    model_config = ConfigDict(from_attributes=True)

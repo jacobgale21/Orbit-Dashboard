@@ -1,18 +1,10 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 import * as THREE from "three";
-
+import { getOrbitData, type OrbitData } from "../api";
+import { useState, useEffect } from "react";
 /** Visual layout only — not true scale */
-const PLANETS = [
-  { name: "Mercury", a: 4, periodDays: 88, color: "#a8a29e", phase: 0.2 },
-  { name: "Venus", a: 6, periodDays: 225, color: "#f59e0b", phase: 1.1 },
-  { name: "Earth", a: 8, periodDays: 365, color: "#38bdf8", phase: 0.0 },
-  { name: "Mars", a: 10, periodDays: 687, color: "#ef4444", phase: 2.0 },
-  { name: "Jupiter", a: 14, periodDays: 4333, color: "#fbbf24", phase: 0.5 },
-  { name: "Saturn", a: 18, periodDays: 10759, color: "#fcd34d", phase: 3.0 },
-  { name: "Uranus", a: 22, periodDays: 30687, color: "#67e8f9", phase: 1.5 },
-  { name: "Neptune", a: 26, periodDays: 60190, color: "#6366f1", phase: 4.0 },
-];
+
 function OrbitRing({ radius }: { radius: number }) {
   const points = [];
   for (let i = 0; i <= 64; i++) {
@@ -73,29 +65,43 @@ function PlanetMarker({
   );
 }
 
-function Scene({ tDays }: { tDays: number }) {
+const KM_PER_AU = 149597870.7;
+const SCENE_UNITS_PER_AU = 4;
+function orbitRadius(semiMajorAxisKm: number | null | undefined) {
+  if (semiMajorAxisKm == null || semiMajorAxisKm <= 0) return 0;
+  const au = semiMajorAxisKm / KM_PER_AU;
+  return au * SCENE_UNITS_PER_AU;
+}
+
+function Scene({
+  tDays,
+  orbitData,
+}: {
+  tDays: number;
+  orbitData: OrbitData[];
+}) {
   return (
     <>
       <color attach="background" args={["#05060d"]} />
       <ambientLight intensity={0.25} />
       <Stars radius={100} depth={40} count={2000} factor={3} fade speed={0.5} />
       <Sun />
-      {PLANETS.map((p) => (
-        <group key={p.name}>
-          <OrbitRing radius={p.a} />
+      {orbitData.map((o) => (
+        <group key={o.name}>
+          <OrbitRing radius={orbitRadius(o.semimajoraxis)} />
           <PlanetMarker
-            a={p.a}
-            color={p.color}
-            periodDays={p.periodDays}
+            a={orbitRadius(o.semimajoraxis)}
+            color={o.glow || "#ffffff"}
+            periodDays={o.period || 0}
             tDays={tDays}
-            phase={p.phase}
+            phase={0}
           />
         </group>
       ))}
       <OrbitControls
         makeDefault
         enableDamping
-        maxDistance={60}
+        maxDistance={200}
         minDistance={5}
         target={[0, 0, 0]}
       />
@@ -104,6 +110,12 @@ function Scene({ tDays }: { tDays: number }) {
 }
 
 export function SolarMapCanvas({ tDays }: { tDays: number }) {
+  const [orbitData, setOrbitData] = useState<OrbitData[]>([]);
+  useEffect(() => {
+    getOrbitData().then((data) => {
+      setOrbitData(data);
+    });
+  }, []);
   return (
     <div className="h-full w-full">
       <Canvas
@@ -111,7 +123,7 @@ export function SolarMapCanvas({ tDays }: { tDays: number }) {
         dpr={[1, 1.5]}
         gl={{ antialias: true, powerPreference: "high-performance" }}
       >
-        <Scene tDays={tDays} />
+        <Scene tDays={tDays} orbitData={orbitData} />
       </Canvas>
     </div>
   );

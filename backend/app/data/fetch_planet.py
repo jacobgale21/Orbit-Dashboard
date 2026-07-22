@@ -54,6 +54,38 @@ def fetch_structures():
         print(f"Error fetching structures: {e}")
         return None
 
+# Get planet api data: Semi-major axis, eccentricity, inclination
+async def get_planet_api():
+    try:
+        headers = {
+            "Authorization": f"Bearer {os.getenv('STRUCTURE_API_KEY')}"
+        }
+        query_params = {
+            "filter[]": "isPlanet,eq,true",
+            "exclude": "moons"
+        }
+        planet_response = requests.get(os.getenv('STRUCTURE_API_URL'), params=query_params, headers=headers)
+
+        planet_data = planet_response.json()
+        planet_dict = planet_data['bodies']
+
+
+        async with SessionLocal() as session:
+            for planet in planet_dict:
+                result = await session.execute(
+                    select(Structure).where(Structure.name == planet['englishName'])
+                )
+                structure = result.scalar_one_or_none()
+                if structure is None:
+                    continue
+                structure.semimajoraxis = planet['semimajorAxis']
+                # structure.eccentricity = planet['eccentricity']
+                # structure.inclination = planet['inclination']
+            await session.commit()
+    except requests.exceptions.RequestException as e:
+        print(f"Error getting planet api data: {e}")
+        return None
+
 async def store_structures(result_list):
     try:
         async with SessionLocal() as session:
@@ -173,4 +205,4 @@ async def add_data():
 
 
 if __name__ == "__main__":
-    asyncio.run(add_data())
+    asyncio.run(get_planet_api())

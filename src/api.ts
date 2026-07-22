@@ -174,6 +174,30 @@ export const getStructureByName = async (name: string): Promise<Structure> => {
   };
 };
 
+export interface OrbitData {
+  id: string;
+  name: string;
+  semimajoraxis: number;
+  eccentricity: number;
+  inclination: number;
+  glow: string | null;
+  period: number | null;
+}
+
+export const getOrbitData = async (): Promise<OrbitData[]> => {
+  const { data } = await api.get<OrbitData[]>("/structures?view=orbit");
+  console.log(data);
+  return data.map((o) => ({
+    id: o.id,
+    name: o.name,
+    semimajoraxis: o.semimajoraxis,
+    eccentricity: o.eccentricity,
+    inclination: o.inclination,
+    glow: o.glow,
+    period: o.period,
+  }));
+};
+
 export interface Mission {
   id: string;
   external_id: string;
