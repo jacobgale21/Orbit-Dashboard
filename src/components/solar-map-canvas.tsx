@@ -94,7 +94,7 @@ function Scene({
             color={o.glow || "#ffffff"}
             periodDays={o.period || 0}
             tDays={tDays}
-            phase={0}
+            phase={(o.long || 0) % 360 || 0}
           />
         </group>
       ))}

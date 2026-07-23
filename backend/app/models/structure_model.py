@@ -38,4 +38,5 @@ class Structure(Base):
     eccentricity: Mapped[float | None] = mapped_column(Float, nullable=True)
     semimajoraxis: Mapped[float | None] = mapped_column(Float, nullable=True)
     inclination: Mapped[float | None] = mapped_column(Float, nullable=True)
+    long: Mapped[float | None] = mapped_column(Float, nullable=True)
     # atmosphere / resources later when you have data

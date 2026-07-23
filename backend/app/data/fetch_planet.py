@@ -204,5 +204,30 @@ async def add_data():
         return None
 
 
+async def add_long_data():
+    try:
+        long_data = {
+            "Mercury": 252.25,
+            "Venus": 181.98,
+            "Earth": 100.46,
+            "Mars": 355.45,
+            "Jupiter": 34.40,
+            "Saturn": 49.94,
+            "Uranus": 313.23,
+            "Neptune": 304.88
+        }
+        async with SessionLocal() as session:
+            for name, data in long_data.items():
+                result = await session.execute(
+                    select(Structure).where(Structure.name == name)
+                )
+                structure = result.scalar_one_or_none()
+                if structure is None:
+                    continue
+                structure.long = data
+            await session.commit()
+    except Exception as e:
+        print(f"Error adding long data: {e}")
+        return None
 if __name__ == "__main__":
-    asyncio.run(get_planet_api())
+    asyncio.run(add_long_data())

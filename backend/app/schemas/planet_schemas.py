@@ -38,4 +38,5 @@ class OrbitData(BaseModel):
     inclination: float | None = None
     glow: str | None = None
     period: float | None = None
+    long: float | None = None
     model_config = ConfigDict(from_attributes=True)

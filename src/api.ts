@@ -182,6 +182,7 @@ export interface OrbitData {
   inclination: number;
   glow: string | null;
   period: number | null;
+  long: number | null;
 }
 
 export const getOrbitData = async (): Promise<OrbitData[]> => {
@@ -195,6 +196,7 @@ export const getOrbitData = async (): Promise<OrbitData[]> => {
     inclination: o.inclination,
     glow: o.glow,
     period: o.period,
+    long: o.long,
   }));
 };
 
