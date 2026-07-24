@@ -1,9 +1,11 @@
 // src/components/timeline-controls.tsx
 import { Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useRef } from "react";
 
 const EPOCH = new Date("2000-01-01T00:00:00Z"); // starts at 2000-01-01
 const MAX_DAYS = 9855; // 26 years of scrub range (exit criteria)
+const MS_PER_DAY = 86_400_000;
 
 const SPEEDS = [
   { label: "1x", daysPerSec: 1 },
@@ -11,8 +13,19 @@ const SPEEDS = [
   { label: "365x", daysPerSec: 365 },
 ];
 
+function dateToSimDays(isoDate: string) {
+  // parse as UTC noon to avoid timezone shifting the calendar day
+  const d = new Date(`${isoDate}T12:00:00Z`);
+  return (d.getTime() - EPOCH.getTime()) / MS_PER_DAY;
+}
+/** simTimeDays → "YYYY-MM-DD" for <input type="date"> */
+function simDaysToDateInput(simTimeDays: number) {
+  const d = new Date(EPOCH.getTime() + simTimeDays * MS_PER_DAY);
+  return d.toISOString().slice(0, 10);
+}
+
 function formatSimDate(simTimeDays: number) {
-  const d = new Date(EPOCH.getTime() + simTimeDays * 86_400_000);
+  const d = new Date(EPOCH.getTime() + simTimeDays * MS_PER_DAY);
   return d.toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
@@ -93,6 +106,20 @@ export function TimelineControls({
             setSimTimeDays(Number(e.target.value));
           }}
           className="w-full accent-sky-400"
+        />
+
+        <input
+          type="date"
+          value={simDaysToDateInput(simTimeDays)}
+          min="2000-01-01"
+          max="2100-12-31"
+          onChange={(e) => {
+            const value = e.target.value;
+            if (!value) return;
+            setPlaying(false);
+            setSimTimeDays(dateToSimDays(value));
+          }}
+          className="w-full rounded-xl border border-white/10 bg-[#05060d] px-5 py-4 text-2xl font-semibold text-slate-100 shadow-none transition scheme-dark focus:border-white/20 focus:outline-none focus:ring-2 focus:ring-white/10"
         />
       </div>
     </div>
