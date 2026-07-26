@@ -1,0 +1,23 @@
+{
+  "Moon": {
+    "period": 27.3,
+    "type_planet": "Moon",
+    "glow": "#cbd5e1",
+    "tagline": "Earth's companion",
+    "fact": "The Moon is tidally locked, the same side always faces Earth."
+  },
+  "Europa": {
+    "period": 3.55,
+    "type_planet": "Moon",
+    "glow": "#a8b4c8",
+    "tagline": "Ocean under ice",
+    "fact": "Europa likely hides a global saltwater ocean beneath its icy crust."
+  },
+  "Titan": {
+    "period": 15.95,
+    "type_planet": "Moon",
+    "glow": "#f59e0b",
+    "tagline": "World of lakes",
+    "fact": "Titan is the only moon with a thick atmosphere and stable surface liquids with methane and ethane seas."
+  }
+}

@@ -1,7 +1,6 @@
 // src/components/timeline-controls.tsx
 import { Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useRef } from "react";
 
 const EPOCH = new Date("2000-01-01T00:00:00Z"); // starts at 2000-01-01
 const MAX_DAYS = 9855; // 26 years of scrub range (exit criteria)
