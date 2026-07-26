@@ -10,7 +10,21 @@ import {
 import { useState, useEffect } from "react";
 import type { MapView } from "../pages/simulator";
 
-/** Visual layout only — not true scale */
+const SYSTEM_RADIUS_SCALE = 1 / 25000;
+const SUBSYSTEM_RADIUS_SCALE = 1 / 4000;
+
+/** Scaling structures by radius in km: Earth ≈ 6371 km, Jupiter ≈ 71492 km, Moon ≈ 1737 km */
+function bodyRadiusScene(
+  radiusKm: number | null | undefined,
+  scale: number, // scene units per km
+  opts?: { min?: number; max?: number; fallback?: number },
+) {
+  const min = opts?.min ?? 0.12;
+  const max = opts?.max ?? 3;
+  const fallback = opts?.fallback ?? 0.35;
+  if (radiusKm == null || radiusKm <= 0) return fallback;
+  return Math.min(max, Math.max(min, radiusKm * scale));
+}
 
 function OrbitRing({ radius }: { radius: number }) {
   const points = [];
@@ -57,6 +71,7 @@ function PlanetMarker({
   tDays,
   phase = 0,
   onSelect,
+  radiusKm,
 }: {
   name: string;
   a: number;
@@ -65,7 +80,13 @@ function PlanetMarker({
   tDays: number;
   phase?: number;
   onSelect?: (name: string) => void;
+  radiusKm: number | null;
 }) {
+  const radius = bodyRadiusScene(radiusKm, SYSTEM_RADIUS_SCALE, {
+    min: 0.15,
+    max: 2.5,
+    fallback: 0.35,
+  });
   const { x, z } = positionOnOrbit(a, periodDays, tDays, phase);
   const canEnter = name === "Earth" || name === "Jupiter" || name === "Saturn";
   return (
@@ -82,13 +103,13 @@ function PlanetMarker({
           document.body.style.cursor = "auto";
         }}
       >
-        <sphereGeometry args={[0.45, 16, 16]} />
+        <sphereGeometry args={[radius, 16, 16]} />
         <meshStandardMaterial color={color} />
       </mesh>
       {/* invisible larger hit sphere */}
       {canEnter && (
         <mesh visible={false}>
-          <sphereGeometry args={[1.2, 8, 8]} />
+          <sphereGeometry args={[radius * 1.5, 8, 8]} />
           <meshBasicMaterial />
         </mesh>
       )}
@@ -132,6 +153,7 @@ function Scene({
             onSelect={(name) =>
               onSelectParent?.(name as "Earth" | "Jupiter" | "Saturn")
             }
+            radiusKm={o.radius}
           />
         </group>
       ))}
@@ -219,7 +241,11 @@ function SubsystemScene({
 }) {
   const meta = orbitData.find((o) => o.name === parent);
   const moons = moonData.filter((m) => m.name === moon_parent(parent));
-
+  const parentR = bodyRadiusScene(meta?.radius, SUBSYSTEM_RADIUS_SCALE, {
+    min: 0.8,
+    max: 3,
+    fallback: 1.4,
+  });
   return (
     <>
       <color attach="background" args={["#05060d"]} />
@@ -229,7 +255,7 @@ function SubsystemScene({
 
       {/* Parent planet fixed at origin */}
       <mesh>
-        <sphereGeometry args={[1.5, 32, 32]} />
+        <sphereGeometry args={[parentR, 32, 32]} />
         <meshStandardMaterial color={meta?.glow || "#ffffff"} />
       </mesh>
 
@@ -253,7 +279,17 @@ function SubsystemScene({
               ).z,
             ]}
           >
-            <sphereGeometry args={[0.35, 16, 16]} />
+            <sphereGeometry
+              args={[
+                bodyRadiusScene(m.radius, SUBSYSTEM_RADIUS_SCALE, {
+                  min: 0.15,
+                  max: 1.2,
+                  fallback: 0.35,
+                }),
+                16,
+                16,
+              ]}
+            />
             <meshStandardMaterial color={m.glow || "#ffffff"} />
           </mesh>
         </group>

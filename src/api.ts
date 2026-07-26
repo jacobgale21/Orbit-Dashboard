@@ -184,6 +184,7 @@ export interface OrbitData {
   semimajoraxis: number;
   eccentricity: number;
   inclination: number;
+  radius: number | null;
   glow: string | null;
   period: number | null;
   long: number | null;
@@ -201,6 +202,7 @@ export const getOrbitData = async (): Promise<OrbitData[]> => {
     glow: o.glow,
     period: o.period,
     long: o.long,
+    radius: o.radius,
   }));
 };
 
@@ -267,6 +269,7 @@ export const getDiscoveries = async (): Promise<Discovery[]> => {
 export interface MoonData {
   id: string;
   name: string;
+  radius: number | null;
   period: number | null;
   type_planet: string | null;
   glow: string | null;
@@ -300,6 +303,7 @@ export const getMoonData = async (): Promise<MoonData[]> => {
     temperature: m.temperature,
     tagline: m.tagline,
     fact: m.fact,
+    radius: m.radius,
     semimajoraxis: m.semimajoraxis,
     eccentricity: m.eccentricity,
     inclination: m.inclination,
