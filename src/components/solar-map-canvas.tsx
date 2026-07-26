@@ -3,6 +3,8 @@ import { OrbitControls, Stars } from "@react-three/drei";
 import * as THREE from "three";
 import { getOrbitData, type OrbitData } from "../api";
 import { useState, useEffect } from "react";
+import type { MapView } from "../pages/simulator";
+import { PARENT_META, PLACEHOLDER_MOONS } from "../data/placeholder";
 /** Visual layout only — not true scale */
 
 function OrbitRing({ radius }: { radius: number }) {
@@ -43,25 +45,49 @@ function positionOnOrbit(
 }
 
 function PlanetMarker({
+  name,
   a,
   color,
   periodDays,
   tDays,
   phase = 0,
+  onSelect,
 }: {
+  name: string;
   a: number;
   color: string;
   periodDays: number;
   tDays: number;
   phase?: number;
+  onSelect?: (name: string) => void;
 }) {
   const { x, z } = positionOnOrbit(a, periodDays, tDays, phase);
-
+  const canEnter = name === "Earth" || name === "Jupiter" || name === "Saturn";
   return (
-    <mesh position={[x, 0, z]}>
-      <sphereGeometry args={[0.35, 16, 16]} />
-      <meshStandardMaterial color={color} />
-    </mesh>
+    <group position={[x, 0, z]}>
+      <mesh
+        onClick={(e) => {
+          e.stopPropagation();
+          if (canEnter) onSelect?.(name);
+        }}
+        onPointerOver={() => {
+          if (canEnter) document.body.style.cursor = "pointer";
+        }}
+        onPointerOut={() => {
+          document.body.style.cursor = "auto";
+        }}
+      >
+        <sphereGeometry args={[0.45, 16, 16]} />
+        <meshStandardMaterial color={color} />
+      </mesh>
+      {/* invisible larger hit sphere */}
+      {canEnter && (
+        <mesh visible={false}>
+          <sphereGeometry args={[1.2, 8, 8]} />
+          <meshBasicMaterial />
+        </mesh>
+      )}
+    </group>
   );
 }
 
@@ -76,9 +102,11 @@ function orbitRadius(semiMajorAxisKm: number | null | undefined) {
 function Scene({
   tDays,
   orbitData,
+  onSelectParent,
 }: {
   tDays: number;
   orbitData: OrbitData[];
+  onSelectParent?: (name: "Earth" | "Jupiter" | "Saturn") => void;
 }) {
   return (
     <>
@@ -95,6 +123,10 @@ function Scene({
             periodDays={o.period || 0}
             tDays={tDays}
             phase={(o.long || 0) % 360 || 0}
+            name={o.name}
+            onSelect={(name) =>
+              onSelectParent?.(name as "Earth" | "Jupiter" | "Saturn")
+            }
           />
         </group>
       ))}
@@ -109,7 +141,15 @@ function Scene({
   );
 }
 
-export function SolarMapCanvas({ tDays }: { tDays: number }) {
+export function SolarMapCanvas({
+  view,
+  tDays,
+  onSelectParent,
+}: {
+  view: MapView;
+  tDays: number;
+  onSelectParent?: (name: "Earth" | "Jupiter" | "Saturn") => void;
+}) {
   const [orbitData, setOrbitData] = useState<OrbitData[]>([]);
   useEffect(() => {
     getOrbitData().then((data) => {
@@ -123,8 +163,68 @@ export function SolarMapCanvas({ tDays }: { tDays: number }) {
         dpr={[1, 1.5]}
         gl={{ antialias: true, powerPreference: "high-performance" }}
       >
-        <Scene tDays={tDays} orbitData={orbitData} />
+        {view.mode === "system" ? (
+          <Scene
+            tDays={tDays}
+            orbitData={orbitData}
+            onSelectParent={(name) =>
+              onSelectParent?.(name as "Earth" | "Jupiter" | "Saturn")
+            }
+          />
+        ) : (
+          <SubsystemScene parent={view.parent} tDays={tDays} />
+        )}
       </Canvas>
     </div>
+  );
+}
+
+function SubsystemScene({
+  parent,
+  tDays,
+}: {
+  parent: "Earth" | "Jupiter" | "Saturn";
+  tDays: number;
+}) {
+  const meta = PARENT_META[parent];
+  const moons = PLACEHOLDER_MOONS.filter((m) => m.parent === parent);
+
+  return (
+    <>
+      <color attach="background" args={["#05060d"]} />
+      <ambientLight intensity={0.35} />
+      <pointLight position={[8, 10, 8]} intensity={1.2} />
+      <Stars radius={60} depth={20} count={800} factor={2} fade />
+
+      {/* Parent planet fixed at origin */}
+      <mesh>
+        <sphereGeometry args={[meta.radius, 32, 32]} />
+        <meshStandardMaterial color={meta.color} />
+      </mesh>
+
+      {moons.map((m) => (
+        <group key={m.name}>
+          <OrbitRing radius={m.a} />
+          <mesh
+            position={[
+              positionOnOrbit(m.a, m.periodDays, tDays, m.phase).x,
+              0,
+              positionOnOrbit(m.a, m.periodDays, tDays, m.phase).z,
+            ]}
+          >
+            <sphereGeometry args={[0.35, 16, 16]} />
+            <meshStandardMaterial color={m.color} />
+          </mesh>
+        </group>
+      ))}
+
+      <OrbitControls
+        makeDefault
+        enableDamping
+        minDistance={4}
+        maxDistance={25}
+        target={[0, 0, 0]}
+      />
+    </>
   );
 }

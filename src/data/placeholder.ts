@@ -46,3 +46,46 @@ export const timeline: TimelineEvent[] = [
     summary: "Probe to Jupiter’s icy moon",
   },
 ];
+
+export type MoonBody = {
+  name: string;
+  parent: "Earth" | "Jupiter" | "Saturn";
+  /** scene units around the parent — NOT heliocentric AU */
+  a: number;
+  periodDays: number;
+  phase: number;
+  color: string;
+};
+
+export const PLACEHOLDER_MOONS: MoonBody[] = [
+  {
+    name: "Moon",
+    parent: "Earth",
+    a: 4, // visual distance from Earth
+    periodDays: 27.3,
+    phase: 0.5,
+    color: "#cbd5e1",
+  },
+  {
+    name: "Europa",
+    parent: "Jupiter",
+    a: 5,
+    periodDays: 3.55,
+    phase: 1.2,
+    color: "#a8b4c8",
+  },
+  {
+    name: "Titan",
+    parent: "Saturn",
+    a: 6,
+    periodDays: 15.95,
+    phase: 2.0,
+    color: "#f59e0b",
+  },
+];
+
+export const PARENT_META = {
+  Earth: { color: "#38bdf8", radius: 1.4 },
+  Jupiter: { color: "#fbbf24", radius: 2.2 },
+  Saturn: { color: "#fcd34d", radius: 2.0 },
+} as const;

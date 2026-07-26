@@ -2,6 +2,15 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { SolarMapCanvas } from "@/components/solar-map-canvas";
 import { TimelineControls, MAX_DAYS } from "@/components/timeline-control";
+import { PLACEHOLDER_MOONS } from "@/data/placeholder";
+
+type SystemView = { mode: "system" };
+type SubsystemView = {
+  mode: "subsystem";
+  parent: "Earth" | "Jupiter" | "Saturn";
+};
+export type MapView = SystemView | SubsystemView;
+
 export default function Simulator() {
   const [simTimeDays, setSimTimeDays] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -13,6 +22,9 @@ export default function Simulator() {
   playingRef.current = playing;
   speedRef.current = speed;
   timeRef.current = simTimeDays;
+
+  const [view, setView] = useState<MapView>({ mode: "system" });
+
   useEffect(() => {
     let frame = 0;
     let last = performance.now();
@@ -54,7 +66,13 @@ export default function Simulator() {
 
       <div className="grid h-screen grid-cols-1 pt-12 lg:grid-cols-[1fr_320px]">
         <div className="relative min-h-0 pb-24">
-          <SolarMapCanvas tDays={simTimeDays} />
+          <SolarMapCanvas
+            view={view}
+            tDays={simTimeDays}
+            onSelectParent={(name) =>
+              setView({ mode: "subsystem", parent: name })
+            }
+          />
           <TimelineControls
             simTimeDays={simTimeDays}
             setSimTimeDays={setSimTimeDays}
@@ -67,19 +85,40 @@ export default function Simulator() {
 
         {/* Side panel placeholder — fill in later */}
         <aside className="hidden border-l border-white/10 bg-white/[0.02] p-5 lg:block">
-          <h2 className="text-sm font-semibold text-white">Destination</h2>
-          <p className="mt-2 text-xs leading-relaxed text-slate-400">
-            Select a body on the map in a later step. For now, drag to orbit and
-            scroll to zoom.
-          </p>
-          <div className="mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-3 text-[11px] text-slate-500">
-            <p>Controls</p>
-            <ul className="mt-2 list-inside list-disc space-y-1">
-              <li>Left drag — rotate</li>
-              <li>Scroll — zoom</li>
-              <li>Right drag — pan</li>
-            </ul>
-          </div>
+          {view.mode === "system" ? (
+            <>
+              <h2 className="text-sm font-semibold text-white">Solar system</h2>
+              <p className="mt-2 text-xs text-slate-400">
+                Click Earth, Jupiter, or Saturn to enter a moon system.
+              </p>
+            </>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => setView({ mode: "system" })}
+                className="mb-4 text-xs text-slate-400 hover:text-white"
+              >
+                ← Back to solar system
+              </button>
+              <h2 className="text-sm font-semibold text-white">
+                {view.parent} system
+              </h2>
+              <ul className="mt-4 space-y-2">
+                {PLACEHOLDER_MOONS.filter((m) => m.parent === view.parent).map(
+                  (m) => (
+                    <li
+                      key={m.name}
+                      className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-2 text-xs"
+                    >
+                      <p className="font-medium text-slate-100">{m.name}</p>
+                      <p className="text-slate-500">Period {m.periodDays} d</p>
+                    </li>
+                  ),
+                )}
+              </ul>
+            </>
+          )}
         </aside>
       </div>
     </div>
