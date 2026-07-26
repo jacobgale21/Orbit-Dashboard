@@ -263,3 +263,47 @@ export const getDiscoveries = async (): Promise<Discovery[]> => {
     details: d.details,
   }));
 };
+
+export interface MoonData {
+  id: string;
+  name: string;
+  period: number | null;
+  type_planet: string | null;
+  glow: string | null;
+  gravity: number | null;
+  escape: number | null;
+  temperature: number | null;
+  tagline: string | null;
+  fact: string | null;
+  semimajoraxis: number | null;
+  eccentricity: number | null;
+  inclination: number | null;
+  mass: {
+    massValue: number;
+    massExponent: number;
+  } | null;
+  volume: {
+    volValue: number;
+    volExponent: number;
+  } | null;
+}
+export const getMoonData = async (): Promise<MoonData[]> => {
+  const { data } = await api.get<MoonData[]>("/structures?structure_type=moon");
+  return data.map((m) => ({
+    id: m.id,
+    name: m.name,
+    period: m.period,
+    type_planet: m.type_planet,
+    glow: m.glow,
+    gravity: m.gravity,
+    escape: m.escape,
+    temperature: m.temperature,
+    tagline: m.tagline,
+    fact: m.fact,
+    semimajoraxis: m.semimajoraxis,
+    eccentricity: m.eccentricity,
+    inclination: m.inclination,
+    mass: m.mass,
+    volume: m.volume,
+  }));
+};

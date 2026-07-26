@@ -1,4 +1,4 @@
-from app.schemas.planet_schemas import StructureOut, OrbitData
+from app.schemas.planet_schemas import StructureOut, OrbitData, MoonData
 from app.database import SessionLocal
 from app.models.structure_model import Structure
 from sqlalchemy import select
@@ -31,11 +31,11 @@ async def get_orbit_data() -> list[OrbitData]:
         print(f"Error getting orbit data: {e}")
         raise HTTPException(status_code=500, detail=f"Error getting orbit data: {e}")
 
-async def get_moon_data() -> list[StructureOut]:
+async def get_moon_data() -> list[MoonData]:
     try:
         async with SessionLocal() as session:
             moon_data = await session.execute(select(Structure).where(Structure.type_planet == "Moon"))
-            return [StructureOut.model_validate(moon_data) for moon_data in moon_data.scalars().all()]
+            return [MoonData.model_validate(moon_data) for moon_data in moon_data.scalars().all()]
     except Exception as e:
         print(f"Error getting moon data: {e}")
         raise HTTPException(status_code=500, detail=f"Error getting moon data: {e}")

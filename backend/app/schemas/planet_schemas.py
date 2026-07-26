@@ -40,3 +40,21 @@ class OrbitData(BaseModel):
     period: float | None = None
     long: float | None = None
     model_config = ConfigDict(from_attributes=True)
+
+class MoonData(BaseModel):
+    id: uuid.UUID
+    name: str
+    period: float | None = None
+    type_planet: str | None = None
+    glow: str | None = None
+    gravity: float | None = None
+    escape: float | None = None
+    temperature: float | None = None
+    tagline: str | None = None
+    fact: str | None = None
+    semimajoraxis: float | None = None
+    eccentricity: float | None = None
+    inclination: float | None = None
+    mass: dict | None = None
+    volume: dict | None = None
+    model_config = ConfigDict(from_attributes=True)

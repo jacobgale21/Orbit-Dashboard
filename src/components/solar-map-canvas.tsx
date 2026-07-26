@@ -1,10 +1,15 @@
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Stars } from "@react-three/drei";
 import * as THREE from "three";
-import { getOrbitData, type OrbitData } from "../api";
+import {
+  getMoonData,
+  getOrbitData,
+  type MoonData,
+  type OrbitData,
+} from "../api";
 import { useState, useEffect } from "react";
 import type { MapView } from "../pages/simulator";
-import { PARENT_META, PLACEHOLDER_MOONS } from "../data/placeholder";
+
 /** Visual layout only — not true scale */
 
 function OrbitRing({ radius }: { radius: number }) {
@@ -156,6 +161,12 @@ export function SolarMapCanvas({
       setOrbitData(data);
     });
   }, []);
+  const [moonData, setMoonData] = useState<MoonData[]>([]);
+  useEffect(() => {
+    getMoonData().then((data) => {
+      setMoonData(data);
+    });
+  }, []);
   return (
     <div className="h-full w-full">
       <Canvas
@@ -172,22 +183,42 @@ export function SolarMapCanvas({
             }
           />
         ) : (
-          <SubsystemScene parent={view.parent} tDays={tDays} />
+          <SubsystemScene
+            parent={view.parent}
+            tDays={tDays}
+            moonData={moonData}
+            orbitData={orbitData}
+          />
         )}
       </Canvas>
     </div>
   );
 }
 
+const SCENE_UNITS_PER_1000_KM = 0.02; // tune so Moon sits nicely around Earth
+function moonOrbitRadius(semiMajorAxisKm: number) {
+  return (semiMajorAxisKm / 1000) * SCENE_UNITS_PER_1000_KM;
+}
+
+function moon_parent(name: string) {
+  if (name === "Earth") return "Moon";
+  if (name === "Jupiter") return "Europa";
+  if (name === "Saturn") return "Titan";
+  return "Moon";
+}
 function SubsystemScene({
   parent,
   tDays,
+  moonData,
+  orbitData,
 }: {
   parent: "Earth" | "Jupiter" | "Saturn";
   tDays: number;
+  moonData: MoonData[];
+  orbitData: OrbitData[];
 }) {
-  const meta = PARENT_META[parent];
-  const moons = PLACEHOLDER_MOONS.filter((m) => m.parent === parent);
+  const meta = orbitData.find((o) => o.name === parent);
+  const moons = moonData.filter((m) => m.name === moon_parent(parent));
 
   return (
     <>
@@ -198,22 +229,32 @@ function SubsystemScene({
 
       {/* Parent planet fixed at origin */}
       <mesh>
-        <sphereGeometry args={[meta.radius, 32, 32]} />
-        <meshStandardMaterial color={meta.color} />
+        <sphereGeometry args={[1.5, 32, 32]} />
+        <meshStandardMaterial color={meta?.glow || "#ffffff"} />
       </mesh>
 
       {moons.map((m) => (
         <group key={m.name}>
-          <OrbitRing radius={m.a} />
+          <OrbitRing radius={moonOrbitRadius(m.semimajoraxis || 0)} />
           <mesh
             position={[
-              positionOnOrbit(m.a, m.periodDays, tDays, m.phase).x,
+              positionOnOrbit(
+                moonOrbitRadius(m.semimajoraxis || 0),
+                m.period || 0,
+                tDays,
+                0,
+              ).x,
               0,
-              positionOnOrbit(m.a, m.periodDays, tDays, m.phase).z,
+              positionOnOrbit(
+                moonOrbitRadius(m.semimajoraxis || 0),
+                m.period || 0,
+                tDays,
+                0,
+              ).z,
             ]}
           >
             <sphereGeometry args={[0.35, 16, 16]} />
-            <meshStandardMaterial color={m.color} />
+            <meshStandardMaterial color={m.glow || "#ffffff"} />
           </mesh>
         </group>
       ))}
