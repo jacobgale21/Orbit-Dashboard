@@ -78,7 +78,7 @@ async def get_planet_api():
                 structure = result.scalar_one_or_none()
                 if structure is None:
                     continue
-                structure.semimajoraxis = planet['semimajorAxis']
+                structure.radius = planet['equaRadius']
                 # structure.eccentricity = planet['eccentricity']
                 # structure.inclination = planet['inclination']
             await session.commit()
@@ -230,4 +230,4 @@ async def add_long_data():
         print(f"Error adding long data: {e}")
         return None
 if __name__ == "__main__":
-    asyncio.run(add_long_data())
+    asyncio.run(get_planet_api())

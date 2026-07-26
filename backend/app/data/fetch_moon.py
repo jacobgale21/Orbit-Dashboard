@@ -73,11 +73,28 @@ async def store_moons_data():
                 structure.glow = data["glow"]
                 structure.tagline = data["tagline"]
                 structure.fact = data["fact"]
-
+                structure.radius = data["radius"]
             await session.commit()
     except Exception as e:
         print(f"Error storing moons data: {e}")
         return None
 
+async def add_api_data():
+    try:
+        async with SessionLocal() as session:
+            moons = await fetch_moons()
+            for moon in moons:
+                result = await session.execute(
+                    select(Structure).where(Structure.name == moon['englishName'])
+                )
+                structure = result.scalar_one_or_none()
+                if structure is None:
+                    continue
+                structure.radius = moon['equaRadius']
+            await session.commit()
+    except Exception as e:
+        print(f"Error adding api data: {e}")
+        return None
+
 if __name__ == "__main__":
-    asyncio.run(store_moons_data())
+    asyncio.run(add_api_data())

@@ -36,6 +36,7 @@ class OrbitData(BaseModel):
     semimajoraxis: float | None = None
     eccentricity: float | None = None
     inclination: float | None = None
+    radius: float | None = None
     glow: str | None = None
     period: float | None = None
     long: float | None = None
@@ -52,6 +53,7 @@ class MoonData(BaseModel):
     temperature: float | None = None
     tagline: str | None = None
     fact: str | None = None
+    radius: float | None = None
     semimajoraxis: float | None = None
     eccentricity: float | None = None
     inclination: float | None = None
