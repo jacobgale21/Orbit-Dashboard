@@ -133,8 +133,12 @@ export const getCurrentUser = async (): Promise<User> => {
   }
 };
 
-export const getStructures = async (): Promise<Structure[]> => {
-  const { data } = await api.get<Structure[]>("/structures");
+export const getStructures = async (
+  structure_type: string = "planet",
+): Promise<Structure[]> => {
+  const { data } = await api.get<Structure[]>("/structures", {
+    params: { structure_type },
+  });
   return data.map((s) => ({
     id: s.id,
     name: s.name,
