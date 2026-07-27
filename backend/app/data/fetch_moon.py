@@ -96,5 +96,23 @@ async def add_api_data():
         print(f"Error adding api data: {e}")
         return None
 
+async def add_temp_data():
+    try:
+        temp_data = {
+            "Titan": 1.35,
+        }
+        async with SessionLocal() as session:
+            for name, data in temp_data.items():
+                result = await session.execute(
+                    select(Structure).where(Structure.name == name)
+                )
+                structure = result.scalar_one_or_none()
+                if structure is None:
+                    continue
+                structure.gravity = data
+            await session.commit()
+    except Exception as e:
+        print(f"Error adding temp data: {e}")
+        return None
 if __name__ == "__main__":
-    asyncio.run(add_api_data())
+    asyncio.run(add_temp_data())

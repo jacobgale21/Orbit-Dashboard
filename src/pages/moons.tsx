@@ -16,6 +16,9 @@ function formatVolume(moon: MoonData) {
   return `${(moon.volume.volValue * 10 ** moon.volume.volExponent).toExponential(2)} km³`;
 }
 
+function convertToCelsius(temperature: number) {
+  return Math.round(temperature - 273.15);
+}
 export default function Moons() {
   const [moons, setMoons] = useState<MoonData[]>([]);
 
@@ -56,7 +59,10 @@ function MoonCard({ moon, index }: { moon: MoonData; index: number }) {
     },
     {
       label: "Temp",
-      value: moon.temperature != null ? `${moon.temperature} K` : "—",
+      value:
+        moon.temperature != null
+          ? `${convertToCelsius(moon.temperature)} °C`
+          : "—",
     },
     {
       label: "Period",

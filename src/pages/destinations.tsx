@@ -11,6 +11,10 @@ function formatMass(structure: Structure) {
   return `${(structure.mass.massValue * 10 ** structure.mass.massExponent).toExponential(2)} kg`;
 }
 
+function convertToCelsius(temperature: number) {
+  return Math.round(temperature - 273.15);
+}
+
 function formatVolume(structure: Structure) {
   if (!structure.volume) return "—";
   return `${(structure.volume.volValue * 10 ** structure.volume.volExponent).toExponential(2)} km³`;
@@ -70,7 +74,10 @@ function PlanetCard({
     },
     {
       label: "Temp",
-      value: structure.temperature != null ? `${structure.temperature} K` : "—",
+      value:
+        structure.temperature != null
+          ? `${convertToCelsius(structure.temperature)} °C`
+          : "—",
     },
     {
       label: "Period",
