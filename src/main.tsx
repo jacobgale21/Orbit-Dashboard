@@ -6,6 +6,7 @@ import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import Simulator from "./pages/simulator";
 import { MapPage } from "./pages/map";
+import Future from "./pages/future";
 
 createRoot(document.getElementById("app")!).render(
   <BrowserRouter>
@@ -15,6 +16,7 @@ createRoot(document.getElementById("app")!).render(
       <Route path="/" element={<Dashboard />} />
       <Route path="/simulator" element={<Simulator />} />
       <Route path="/map" element={<MapPage />} />
+      <Route path="/future" element={<Future />} />
     </Routes>
   </BrowserRouter>,
 );

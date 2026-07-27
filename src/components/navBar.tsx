@@ -10,6 +10,7 @@ const nav = [
   { label: "Discoveries", href: "#discoveries" },
   { label: "Simulator", href: "/simulator" },
   { label: "Mars Journey", href: "/map" },
+  { label: "Future", href: "/future" },
   { label: "About", href: "#about" },
 ];
 
