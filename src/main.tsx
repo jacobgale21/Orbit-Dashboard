@@ -5,6 +5,7 @@ import Register from "./pages/register";
 import Login from "./pages/login";
 import Dashboard from "./pages/dashboard";
 import Simulator from "./pages/simulator";
+import { MapPage } from "./pages/map";
 
 createRoot(document.getElementById("app")!).render(
   <BrowserRouter>
@@ -13,6 +14,7 @@ createRoot(document.getElementById("app")!).render(
       <Route path="/login" element={<Login />} />
       <Route path="/" element={<Dashboard />} />
       <Route path="/simulator" element={<Simulator />} />
+      <Route path="/map" element={<MapPage />} />
     </Routes>
   </BrowserRouter>,
 );

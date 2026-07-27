@@ -10,6 +10,7 @@ const nav = [
   { label: "Discoveries", href: "#discoveries" },
   { label: "Simulator", href: "/simulator" },
   { label: "About", href: "#about" },
+  { label: "Map", href: "/map" },
 ];
 
 export default function SiteNavbar() {
