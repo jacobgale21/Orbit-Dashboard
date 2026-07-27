@@ -8,6 +8,7 @@ import MissionTimeline from "./timeline";
 import CurrentMissions from "./currentMissions";
 import Discoveries from "./discoveries";
 import Destinations from "./destinations";
+import Moons from "./moons";
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -55,6 +56,7 @@ export default function Dashboard() {
           <CurrentMissions />
           <Discoveries />
           <Destinations />
+          <Moons />
         </div>
       </main>
     </div>

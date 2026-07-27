@@ -9,8 +9,8 @@ const nav = [
   { label: "Destinations", href: "#destinations" },
   { label: "Discoveries", href: "#discoveries" },
   { label: "Simulator", href: "/simulator" },
+  { label: "Mars Journey", href: "/map" },
   { label: "About", href: "#about" },
-  { label: "Map", href: "/map" },
 ];
 
 export default function SiteNavbar() {

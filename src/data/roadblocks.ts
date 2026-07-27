@@ -100,7 +100,7 @@ export const roadblocks: Roadblock[] = [
     readiness: 5,
     opportunity: 65,
     problem:
-      "No resupply for up to three years. Air, water and waste loops must close to near-100% with hardware that is repairable in flight — ISS regenerative systems still leak mass and fail often.",
+      "No resupply for up to three years. Air, water and waste loops must close to near-100% with hardware that is repairable in flight — Current ISS Environmental Control and Life Support Systems recover much of the water and oxygen, but still require periodic resupply and maintenance.",
     solutions: [
       "Sabatier CO2 reduction plus electrolysis oxygen generation",
       "Urine and humidity condensate recovery above 90%",
@@ -158,7 +158,7 @@ export const roadblocks: Roadblock[] = [
     readiness: 4,
     opportunity: 72,
     problem:
-      "Mars' atmosphere is thick enough to burn you but too thin to stop you. The largest object ever landed is ~1 t; crewed missions need 20-50 t delivered within hundreds of metres of a prepared site.",
+      "Mars' atmosphere is thick enough to burn you but too thin to stop you. The largest object ever landed is ~1 t; crewed missions need 20-50 t delivered within hundreds of metres of a prepared site, with no proven system for such large payloads.",
     solutions: [
       "Guided hypersonic entry with supersonic retropropulsion",
       "Sky crane and terrain-relative navigation (Perseverance heritage)",
