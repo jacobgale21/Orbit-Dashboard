@@ -276,7 +276,7 @@ function Dossier({ node, onClose }: { node: Roadblock; onClose: () => void }) {
       <aside
         role="dialog"
         aria-label={`${node.title} dossier`}
-        className="panel-in fixed right-0 top-0 z-50 flex h-full w-full max-w-xl flex-col border-l border-signal-dim/30 bg-space-panel shadow-2xl"
+        className="panel-in fixed right-0 top-16 z-50 flex h-[calc(100%-4rem)] w-full max-w-xl flex-col border-l border-signal-dim/30 bg-[#0b1224] shadow-2xl"
       >
         <header className="relative border-b border-signal-dim/25 px-7 py-6">
           <div className="pointer-events-none absolute inset-0 blueprint-grid opacity-50" />
@@ -289,7 +289,7 @@ function Dossier({ node, onClose }: { node: Roadblock; onClose: () => void }) {
               />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-signal">
+              <p className="font-mono text-[10px] uppercase tracking-[0.35em] text-signal text-[#40E0D0]">
                 {node.code} · {node.phase}
               </p>
               <h2 className="mt-1 font-mono text-2xl font-semibold text-hull">
@@ -363,7 +363,7 @@ function Meter({
   caption: string;
   tone: "signal" | "rust";
 }) {
-  const color = tone === "signal" ? "var(--signal)" : "var(--rust-glow)";
+  const color = tone === "signal" ? "#40E0D0" : "#FF4500";
   return (
     <div>
       <div className="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.25em] text-hull-muted">
@@ -374,9 +374,9 @@ function Meter({
         {Array.from({ length: 18 }).map((_, i) => (
           <span
             key={i}
-            className="h-2.5 flex-1 rounded-[1px] transition-colors"
+            className="h-2.5 flex-1 rounded-[1px] transition-colors "
             style={{
-              background: i / 18 < value ? color : "oklch(0.3 0.02 250)",
+              background: i / 18 < value ? color : "oklch(0.3 0.02 195)",
               opacity: i / 18 < value ? 0.95 : 0.5,
             }}
           />
@@ -400,7 +400,7 @@ function Block({
 }) {
   return (
     <section>
-      <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-signal">
+      <h3 className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.3em] text-signal text-[#40E0D0]">
         <Icon className="h-3.5 w-3.5" />
         {title}
       </h3>

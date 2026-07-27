@@ -145,3 +145,18 @@ body {
     @apply font-sans;
   }
 }
+
+@utility mission-dash {
+  stroke-dasharray: 10 14;
+  animation: mission-flow 1.6s linear infinite;
+}
+
+@utility node-pulse {
+  animation: node-pulse 2.6s ease-out infinite;
+}
+
+@keyframes mission-flow {
+  to {
+    stroke-dashoffset: -48;
+  }
+}
