@@ -9,7 +9,7 @@ import CurrentMissions from "./currentMissions";
 import Discoveries from "./discoveries";
 import Destinations from "./destinations";
 import Moons from "./moons";
-import Chatbot from "./chatbot";
+import Chatbot from "../components/chat/chatbot";
 
 export default function Dashboard() {
   const navigate = useNavigate();

@@ -1,7 +1,8 @@
 // src/components/ChatbotPanel.tsx
 import { useState } from "react";
-import { MessageCircle, X, Send } from "lucide-react";
+import { X, Send, Eclipse } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SuggestedPrompts from "./suggestedPrompts";
 
 type Msg = { role: "user" | "assistant"; text: string };
 
@@ -11,21 +12,24 @@ export default function ChatbotPanel() {
   const [messages, setMessages] = useState<Msg[]>([
     {
       role: "assistant",
-      text: "Ask me about missions, destinations, or the voyage simulator.",
+      text: "Hello! I'm the Mission Control chatbot. I am here to help you with space knowledge navigation!",
     },
   ]);
+
+  const [hasMessages, setHasMessages] = useState(false);
 
   function send() {
     const text = input.trim();
     if (!text) return;
     setMessages((m) => [...m, { role: "user", text }]);
+    setHasMessages(true);
     setInput("");
     // placeholder until backend exists
     setMessages((m) => [
       ...m,
       {
         role: "assistant",
-        text: "Chat backend isn’t wired yet — your question was received.",
+        text: "Chat backend isn't wired yet — your question was received.",
       },
     ]);
   }
@@ -37,10 +41,10 @@ export default function ChatbotPanel() {
         <Button
           type="button"
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-6 right-6 z-[60] h-12 w-12 rounded-full shadow-lg"
+          className="fixed bottom-6 right-6 z-[60] h-20 w-20 rounded-full shadow-lg"
           aria-label="Open Orbit Assistant"
         >
-          <MessageCircle className="h-5 w-5" />
+          <Eclipse className="h-15 w-15" />
         </Button>
       )}
 
@@ -61,12 +65,18 @@ export default function ChatbotPanel() {
       >
         <header className="flex items-center justify-between border-b border-white/10 px-4 py-3">
           <div>
-            <h2 className="text-sm font-semibold text-white">
-              Orbit Assistant
+            <h2 className="mt-5 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
+              Mission Control
             </h2>
-            <p className="text-[11px] text-slate-500">
-              Ask about the Solar System
+            <p className="mt-3 text-pretty text-sm text-slate-400">
+              Ask about the following topics:
             </p>
+            <ol className="list-disc list-inside text-pretty text-sm text-slate-400">
+              <li>Mars Mission</li>
+              <li>Colonization of the Solar System</li>
+              <li>Key Space Discoveries (e.g. Voyager 1, Voyager 2)</li>
+              <li>Revolutionary Space Technologies (e.g. Orion, SLS)</li>
+            </ol>
           </div>
           <button
             type="button"
@@ -79,18 +89,22 @@ export default function ChatbotPanel() {
         </header>
 
         <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
-          {messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm ${
-                msg.role === "user"
-                  ? "ml-auto bg-sky-500/20 text-sky-100"
-                  : "bg-white/5 text-slate-200"
-              }`}
-            >
-              {msg.text}
-            </div>
-          ))}
+          {hasMessages ? (
+            messages.map((msg, i) => (
+              <div
+                key={i}
+                className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm ${
+                  msg.role === "user"
+                    ? "ml-auto bg-sky-500/20 text-sky-100"
+                    : "bg-white/5 text-slate-200"
+                }`}
+              >
+                {msg.text}
+              </div>
+            ))
+          ) : (
+            <SuggestedPrompts />
+          )}
         </div>
 
         <form
