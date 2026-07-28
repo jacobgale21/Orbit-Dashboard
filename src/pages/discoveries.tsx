@@ -44,7 +44,7 @@ export default function Discoveries() {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <header className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
-          <h2 className="mt-5 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-3xl font-semibold tracking-tight text-transparent sm:text-4xl">
+          <h2 className="mt-5 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-4xl font-semibold tracking-tight">
             Major Space Discoveries
           </h2>
           <p className="mt-4 text-pretty text-sm text-slate-400 sm:text-base">

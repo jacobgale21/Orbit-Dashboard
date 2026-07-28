@@ -9,7 +9,7 @@ export default function HeroSection() {
           Deep space exploration
         </p>
         <header className="mx-auto max-w-3xl">
-          <h1 className="mt-6 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-5xl font-semibold tracking-tight text-transparent sm:text-6xl">
+          <h1 className="mt-6 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-5xl font-semibold tracking-tight sm:text-6xl">
             Explore Humanity&apos;s Journey Beyond Earth
           </h1>
           <p className="mt-5 text-pretty text-base text-slate-400 sm:text-lg">
@@ -18,7 +18,7 @@ export default function HeroSection() {
           </p>
         </header>
         <div className="mt-10 flex flex-wrap gap-3">
-          <Button size="lg" className="bg-accent-soft hover:bg-accent-soft/20">
+          <Button size="lg" variant="default">
             <a href="#missions">Explore Missions</a>
           </Button>
           <Button
@@ -27,6 +27,9 @@ export default function HeroSection() {
             className="border-white/20 bg-transparent text-white hover:bg-white/20"
           >
             <a href="#timeline">View Mission Timeline</a>
+          </Button>
+          <Button size="lg" variant="outline">
+            <a href="#destinations">Explore Solar System</a>
           </Button>
         </div>
       </div>

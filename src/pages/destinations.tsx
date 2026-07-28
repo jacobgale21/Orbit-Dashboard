@@ -34,7 +34,7 @@ export default function Destinations() {
     >
       <div className="relative mx-auto max-w-7xl px-6 py-20 sm:py-28">
         <header className="mx-auto max-w-3xl text-center">
-          <h1 className="mt-6 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-5xl font-semibold tracking-tight text-transparent sm:text-6xl">
+          <h1 className="mt-6 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-5xl font-semibold tracking-tight sm:text-6xl">
             The Solar System
           </h1>
           <p className="mt-5 text-pretty text-base text-slate-400 sm:text-lg">

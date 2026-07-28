@@ -5,6 +5,7 @@ import { DependencyGraph } from "../components/future/DependencyGraph";
 import { FutureTheoryCard } from "../components/future/FutureTheoryCard";
 import { TechnologyGapCard } from "../components/future/TechnologyGapCard";
 import { futureTheories, technologyGaps } from "@/data/roadmap";
+import SiteNavbar from "../components/navBar";
 
 function SectionHeading({
   eyebrow,
@@ -39,6 +40,7 @@ function SectionHeading({
 export default function Future() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-background">
+      <SiteNavbar />
       <SpaceBackground />
 
       <section

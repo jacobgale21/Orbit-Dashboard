@@ -56,7 +56,7 @@ export function MissionMap() {
         <p className="font-mono text-xs uppercase tracking-[0.42em] text-signal">
           Mission Architecture / Sheet 01
         </p>
-        <h1 className="mt-5 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-5xl font-semibold tracking-tight text-transparent sm:text-5xl">
+        <h1 className="mt-5 text-balance bg-gradient-to-b from-white via-white to-slate-400 bg-clip-text text-5xl font-semibold tracking-tight sm:text-5xl">
           Roadblocks to Human Mars Exploration
         </h1>
         <p className="mt-4 max-w-2xl text-base leading-relaxed text-hull-muted">
