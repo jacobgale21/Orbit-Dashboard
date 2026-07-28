@@ -9,21 +9,22 @@ import CurrentMissions from "./currentMissions";
 import Discoveries from "./discoveries";
 import Destinations from "./destinations";
 import Moons from "./moons";
+import Chatbot from "./chatbot";
 
 export default function Dashboard() {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
-  useEffect(() => {
-    getCurrentUser()
-      .then(setCurrentUser)
-      .catch(() => {
-        localStorage.clear();
-        setError("Session expired");
-        navigate("/login");
-      });
-  }, [navigate]);
+  // useEffect(() => {
+  //   getCurrentUser()
+  //     .then(setCurrentUser)
+  //     .catch(() => {
+  //       localStorage.clear();
+  //       setError("Session expired");
+  //       navigate("/login");
+  //     });
+  // }, [navigate]);
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
@@ -59,6 +60,7 @@ export default function Dashboard() {
           <Moons />
         </div>
       </main>
+      <Chatbot />
     </div>
   );
 }
