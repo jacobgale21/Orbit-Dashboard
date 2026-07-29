@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { loginUser } from "../api";
+import { loginUser, googleLogin } from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -23,6 +24,17 @@ export default function Login() {
       setError("Login failed. Check your credentials and try again.");
     } finally {
       setLoading(false);
+    }
+  };
+  const handleGoogleLogin = async (credentialResponse: any) => {
+    try {
+      const data = await googleLogin(credentialResponse);
+      console.log(data);
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("refresh_token", data.refresh_token);
+      navigate("/");
+    } catch (error) {
+      console.error("Error logging in with Google:", error);
     }
   };
 
@@ -108,7 +120,11 @@ export default function Login() {
               {error}
             </p>
           )}
-
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              handleGoogleLogin(credentialResponse);
+            }}
+          />
           <Button type="submit" disabled={loading} className="w-full">
             {loading ? "Signing in…" : "Sign in"}
           </Button>

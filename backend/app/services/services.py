@@ -2,7 +2,7 @@ from argon2 import PasswordHasher
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.models.user_models import User
-from app.schemas.user_schemas import UserCreate, UserLogin, UserResponse
+from app.schemas.user_schemas import UserCreate, UserLogin, UserResponse, GoogleLoginRequest
 from fastapi import HTTPException, Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from datetime import datetime, timedelta, timezone
@@ -10,6 +10,8 @@ from jose import jwt, JWTError
 import os
 from dotenv import load_dotenv
 from app.database import get_db
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
 load_dotenv()
 ph = PasswordHasher()
@@ -78,6 +80,29 @@ async def login_user(db: AsyncSession, user_in: UserLogin) -> User:
     except Exception as e:
         print("Error logging in user:", e)
         raise HTTPException(status_code=500, detail=str(e))
+
+
+async def google_login_user(db: AsyncSession, request: GoogleLoginRequest):
+    try:
+        user_info = id_token.verify_oauth2_token(request.credential, requests.Request(), os.getenv("OAUTH_CLIENT_ID"))
+        email = user_info["email"]
+        # Look for user by email
+        existing_user = await db.execute(select(User).where(User.email == email))
+        user = existing_user.scalar_one_or_none()
+        # If user not found, create a new user
+        if not user:
+            new_user = User(email=email, username=email[:email.index("@")], password=None, google_id=user_info["sub"])
+            db.add(new_user)
+            await db.commit()
+            await db.refresh(new_user)
+            user = new_user
+        # Login user
+        return {"access_token": await create_access_token(str(user.id)),
+        "refresh_token": await create_refresh_token(str(user.id)),
+        "token_type": "bearer"}
+    except Exception as e:
+        print("Error logging in with Google:", e)
+        raise HTTPException(status_code=401, detail="Invalid Google credential")
 
 # Get current user
 async def get_current_user(db: AsyncSession = Depends(get_db), creds: HTTPAuthorizationCredentials = Depends(security)) -> UserResponse:

@@ -3,7 +3,8 @@ from app.schemas.user_schemas import UserCreate, UserLogin, UserResponse, Refres
 from sqlalchemy.ext.asyncio import AsyncSession
 from fastapi import Depends
 from app.database import get_db
-from app.services.services import create_user, login_user, get_current_user, refresh_token_auth
+from app.services.services import create_user, login_user, get_current_user, refresh_token_auth, google_login_user
+from app.schemas.user_schemas import GoogleLoginRequest
 
 router = APIRouter()
 
@@ -21,6 +22,11 @@ async def register(user: UserCreate, db: AsyncSession = Depends(get_db)):
 @router.post("/login")
 async def login(user: UserLogin, db: AsyncSession = Depends(get_db)):
     tokens = await login_user(db, user)
+    return tokens
+
+@router.post("/login/google")
+async def google_login(request: GoogleLoginRequest, db: AsyncSession = Depends(get_db)):
+    tokens = await google_login_user(db, request)
     return tokens
 
 @router.get("/current-user")

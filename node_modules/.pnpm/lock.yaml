@@ -14,6 +14,9 @@ importers:
       '@fontsource-variable/geist':
         specifier: ^5.2.9
         version: 5.2.9
+      '@react-oauth/google':
+        specifier: ^0.13.5
+        version: 0.13.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@react-three/drei':
         specifier: ^10.7.7
         version: 10.7.7(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(three@0.185.1))(@types/react@19.2.17)(@types/three@0.185.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(three@0.185.1)
@@ -341,6 +344,12 @@ packages:
 
   '@oxc-project/types@0.139.0':
     resolution: {integrity: sha512-r9gHphtCs+1M7J0pw6Sn/hh/Wpa/iQrOOkrNAlVLF/gHq+/CJmHIWKKUUhdWjcD6CIa8idarspCsASiXCXvFUw==}
+
+  '@react-oauth/google@0.13.5':
+    resolution: {integrity: sha512-xQWri2s/3nNekZJ4uuov2aAfQYu83bN3864KcFqw2pK1nNbFurQIjPFDXhWaKH3IjYJ2r/9yyIIpsn5lMqrheQ==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
 
   '@react-three/drei@10.7.7':
     resolution: {integrity: sha512-ff+J5iloR0k4tC++QtD/j9u3w5fzfgFAWDtAGQah9pF2B1YgOq/5JxqY0/aVoQG5r3xSZz0cv5tk2YuBob4xEQ==}
@@ -2496,6 +2505,11 @@ snapshots:
       fastq: 1.20.1
 
   '@oxc-project/types@0.139.0': {}
+
+  '@react-oauth/google@0.13.5(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+    dependencies:
+      react: 19.2.7
+      react-dom: 19.2.7(react@19.2.7)
 
   '@react-three/drei@10.7.7(@react-three/fiber@9.6.1(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(three@0.185.1))(@types/react@19.2.17)(@types/three@0.185.1)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)(three@0.185.1)':
     dependencies:

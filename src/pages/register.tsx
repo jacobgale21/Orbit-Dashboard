@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { registerUser } from "../api";
+import { googleLogin, registerUser } from "../api";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -22,6 +23,17 @@ export default function Register() {
       setError("Registration failed. Try a different username or email.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleGoogleLogin = async (credentialResponse: any) => {
+    try {
+      const data = await googleLogin(credentialResponse);
+      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("refresh_token", data.refresh_token);
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error("Error logging in with Google:", error);
     }
   };
 
@@ -130,6 +142,15 @@ export default function Register() {
           <Button type="submit" disabled={loading} className="w-full">
             {loading ? "Creating account…" : "Create account"}
           </Button>
+          <GoogleLogin
+            onSuccess={(credentialResponse) => {
+              handleGoogleLogin(credentialResponse);
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.error("Error logging in with Google:");
+            }}
+          />
         </form>
 
         <p className="mt-6 text-center text-sm text-slate-400">

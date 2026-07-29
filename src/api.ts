@@ -323,3 +323,15 @@ export const getChatbotResponse = async (
   const { data } = await api.post<ChatbotResponse>("/chat", { message });
   return data;
 };
+
+export const googleLogin = async (credentialResponse: any) => {
+  try {
+    const { data } = await api.post("/login/google", {
+      credential: credentialResponse.credential,
+    });
+    return data;
+  } catch (error) {
+    console.error("Error logging in with Google:", error);
+    throw error;
+  }
+};
