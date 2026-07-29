@@ -311,3 +311,15 @@ export const getMoonData = async (): Promise<MoonData[]> => {
     volume: m.volume,
   }));
 };
+
+export interface ChatbotResponse {
+  type_of_response: string | null;
+  path: string | null;
+  response: string;
+}
+export const getChatbotResponse = async (
+  message: string,
+): Promise<ChatbotResponse> => {
+  const { data } = await api.post<ChatbotResponse>("/chat", { message });
+  return data;
+};

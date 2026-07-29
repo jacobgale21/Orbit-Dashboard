@@ -4,6 +4,7 @@ from app.routers import router_auth
 from app.routers import router_planet
 from app.routers import router_missions
 from app.routers import router_discoveries
+from app.routers import router_chatbot
 app = FastAPI()
 
 
@@ -16,6 +17,7 @@ app.add_middleware(
 )
 
 app.include_router(router_auth.router)
+app.include_router(router_chatbot.router)
 app.include_router(router_discoveries.router)
 app.include_router(router_planet.router)
 app.include_router(router_missions.router)

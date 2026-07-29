@@ -3,6 +3,8 @@ import { useState } from "react";
 import { X, Send, Eclipse } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import SuggestedPrompts from "./suggestedPrompts";
+import { getChatbotResponse } from "@/api";
+import { useNavigate } from "react-router-dom";
 
 type Msg = { role: "user" | "assistant"; text: string };
 
@@ -15,12 +17,23 @@ export default function ChatbotPanel() {
       text: "Hello! I'm the Mission Control chatbot. I am here to help you with space knowledge navigation!",
     },
   ]);
-
   const [hasMessages, setHasMessages] = useState(false);
+  const navigate = useNavigate();
 
-  function send() {
+  async function send() {
     const text = input.trim();
     if (!text) return;
+    console.log(text);
+    const response = await getChatbotResponse(text);
+    console.log(response);
+    if (response.type_of_response === "route") {
+      navigate(response.path || "/");
+    } else if (response.type_of_response === "scroll") {
+      document.getElementById(response.path || "")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
     setMessages((m) => [...m, { role: "user", text }]);
     setHasMessages(true);
     setInput("");
@@ -29,7 +42,7 @@ export default function ChatbotPanel() {
       ...m,
       {
         role: "assistant",
-        text: "Chat backend isn't wired yet — your question was received.",
+        text: response.response,
       },
     ]);
   }

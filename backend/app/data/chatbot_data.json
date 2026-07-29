@@ -1,0 +1,132 @@
+{
+  "intents": [
+    {
+      "id": "map",
+      "name": "Mission Roadblocks",
+      "type_of_response": "route",
+      "path": "/map",
+      "response": "Let's explore the biggest challenges preventing humanity from traveling deeper into space.",
+      "priority": 10,
+      "keywords": {
+        "mars": 2,
+        "mars mission": 5,
+        "roadblocks": 4,
+        "limitations": 4,
+        "before we go": 5,
+        "obstacles": 3,
+        "problems": 2,
+        "space travel": 2
+      }
+    },
+    {
+      "id": "future",
+      "name": "Future Exploration",
+      "type_of_response": "route",
+      "path": "/future",
+      "response": "Let's take a look at the future roadmap of human space exploration.",
+      "priority": 10,
+      "keywords": {
+        "future": 3,
+        "roadmap": 5,
+        "colonize": 5,
+        "colonization": 5,
+        "settlement": 4,
+        "terraform": 5,
+        "mars colony": 5,
+        "interstellar": 3
+      }
+    },
+    {
+      "id": "discoveries",
+      "name": "Space Discoveries",
+      "type_of_response": "scroll",
+      "path": "discoveries",
+      "response": "Here are some of humanity's most important discoveries in space.",
+      "priority": 5,
+      "keywords": {
+        "discoveries": 5,
+        "space discoveries": 5,
+        "discovery": 4,
+        "science": 2,
+        "breakthrough": 3
+      }
+    },
+    {
+      "id": "missions",
+      "name": "Space Missions",
+      "type_of_response": "scroll",
+      "path": "missions",
+      "response": "Let's look at some of the most significant missions in space exploration.",
+      "priority": 5,
+      "keywords": {
+        "missions": 5,
+        "space missions": 5,
+        "voyager": 5,
+        "apollo": 4,
+        "perseverance": 4,
+        "curiosity": 4,
+        "cassini": 4,
+        "new horizons": 4
+      }
+    },
+    {
+      "id": "destinations",
+      "name": "Planetary Destinations",
+      "type_of_response": "scroll",
+      "path": "destinations",
+      "response": "Explore the planets of our Solar System.",
+      "priority": 5,
+      "keywords": {
+        "planets": 5,
+        "planet": 4,
+        "destinations": 3,
+        "planetary system": 5,
+        "mars": 3,
+        "jupiter": 3,
+        "saturn": 3,
+        "venus": 3,
+        "mercury": 3,
+        "uranus": 3,
+        "neptune": 3
+      }
+    },
+    {
+      "id": "moons",
+      "name": "Moons",
+      "type_of_response": "scroll",
+      "path": "moons",
+      "response": "Let's explore some of the fascinating moons in our Solar System.",
+      "priority": 5,
+      "keywords": {
+        "moon": 5,
+        "moons": 5,
+        "europa": 5,
+        "titan": 5,
+        "enceladus": 5,
+        "ganymede": 5,
+        "callisto": 4,
+        "io": 4
+      }
+    },
+    {
+      "id": "simulator",
+      "name": "Orbital Simulator",
+      "type_of_response": "route",
+      "path": "/simulator",
+      "response": "Opening the orbital simulator.",
+      "priority": 10,
+      "keywords": {
+        "simulation": 5,
+        "simulator": 5,
+        "orbit": 4,
+        "orbits": 4,
+        "trajectory": 4,
+        "launch window": 3,
+        "transfer": 2
+      }
+    }
+  ],
+  "fallback": {
+    "response": "I'm not sure what you're looking for. Try asking about missions, planets, future exploration, or the simulator."
+  }
+}
