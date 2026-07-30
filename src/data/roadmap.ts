@@ -380,7 +380,11 @@ export const milestones: Milestone[] = [
 export type DependencyNode = {
   id: string;
   label: string;
-  detail: string;
+  detail: string; // short subtitle
+  summary: string; // 1–2 sentences
+  unlocks: string; // what this enables
+  timeframe?: string; // e.g. "Near-term"
+  status?: "mature" | "emerging" | "aspirational";
   children: string[];
 };
 
@@ -389,37 +393,65 @@ export const dependencyChain: DependencyNode[] = [
     id: "reusable",
     label: "Reusable Rockets",
     detail: "Fly, land, refuel, repeat.",
+    summary:
+      "Reusable rockets reduce launch costs and increase payload capacity.",
+    unlocks: "Cheap launch",
+    timeframe: "Near-term",
+    status: "mature",
     children: ["cheap-launch"],
   },
   {
     id: "cheap-launch",
     label: "Cheap Launch",
     detail: "Mass to orbit stops being the bottleneck.",
+    summary:
+      "Cheap launch reduces launch costs and increases payload capacity.",
+    unlocks: "Orbital manufacturing",
+    timeframe: "Near-term",
+    status: "mature",
     children: ["orbital-manufacturing"],
   },
   {
     id: "orbital-manufacturing",
     label: "Orbital Manufacturing",
     detail: "Structures built where they are used.",
+    summary:
+      "Orbital manufacturing allows structures to be built where they are used.",
+    unlocks: "Fuel depots",
+    timeframe: "Near-term",
+    status: "emerging",
     children: ["fuel-depots"],
   },
   {
     id: "fuel-depots",
     label: "Fuel Depots",
     detail: "Propellant waiting along the route.",
+    summary:
+      "Fuel depots allow propellant to be stored and used along the route.",
+    unlocks: "Mars logistics",
+    timeframe: "Mid-term",
+    status: "aspirational",
     children: ["mars-logistics"],
   },
   {
     id: "mars-logistics",
     label: "Mars Logistics",
     detail: "Regular cargo cadence to a second world.",
+    summary: "Mars logistics allows regular cargo cadence to a second world.",
+    unlocks: "Permanent colonies",
+    timeframe: "Long-term",
+    status: "aspirational",
     children: ["colonies"],
   },
   {
     id: "colonies",
     label: "Permanent Colonies",
     detail: "Self-sustaining human presence.",
-    children: [],
+    summary: "Permanent colonies allow humans to live on other planets.",
+    unlocks: "Interplanetary trade",
+    timeframe: "Long-term",
+    status: "aspirational",
+    children: ["interplanetary-trade"],
   },
 ];
 

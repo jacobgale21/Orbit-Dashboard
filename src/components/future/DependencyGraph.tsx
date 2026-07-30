@@ -31,29 +31,36 @@ export function DependencyGraph() {
               key={node.id}
               className="flex w-full max-w-lg flex-col items-center"
             >
-              <motion.button
-                type="button"
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.4, delay: i * 0.05 }}
-                onMouseEnter={() => setHovered(node.id)}
-                onMouseLeave={() => setHovered(null)}
-                onFocus={() => setHovered(node.id)}
-                onBlur={() => setHovered(null)}
-                className={`w-full rounded-2xl border px-5 py-4 text-left transition-all duration-300 ${
-                  on
-                    ? "glow-ring border-primary bg-primary/15"
-                    : "border-border bg-card/40 hover:border-primary/50"
-                }`}
+              <motion.article
+                layout
+                whileHover={{ y: -6, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 320, damping: 24 }}
+                className={`glass-panel group w-full max-w-sm rounded-2xl border p-5 text-left transition-shadow duration-300
+    ${on ? "glow-ring border-primary/60 bg-primary/10" : "border-border/60 hover:border-primary/40 hover:shadow-[var(--shadow-glow)]"}
+  `}
               >
-                <p
-                  className={`font-display text-base font-semibold ${on ? "text-primary" : "text-foreground"}`}
-                >
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[11px] uppercase tracking-[0.2em] text-primary/80">
+                    {node.timeframe ?? `Step ${i + 1}`}
+                  </span>
+                  <span className="rounded-md bg-secondary/50 px-2 py-0.5 text-[10px] uppercase text-muted-foreground">
+                    {node.status}
+                  </span>
+                </div>
+                <h4 className="font-display mt-2 text-lg font-semibold">
                   {node.label}
+                </h4>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {node.detail}
                 </p>
-                <p className="text-sm text-muted-foreground">{node.detail}</p>
-              </motion.button>
+                {/* Extra info: always visible on md+, or reveal on hover */}
+                <div className="mt-3 max-h-0 overflow-hidden opacity-0 transition-all duration-300 group-hover:max-h-40 group-hover:opacity-100">
+                  <p className="text-sm text-foreground/90">{node.summary}</p>
+                  <p className="mt-2 text-xs text-primary/90">
+                    Unlocks: {node.unlocks}
+                  </p>
+                </div>
+              </motion.article>
 
               {i < dependencyChain.length - 1 && (
                 <div className="relative flex h-12 items-center justify-center">
@@ -64,12 +71,9 @@ export function DependencyGraph() {
                         : "bg-border"
                     }`}
                   />
+
                   <ArrowDown
-                    className={`relative size-4 transition-colors ${
-                      lit.includes(dependencyChain[i + 1].id) && on
-                        ? "text-primary"
-                        : "text-muted-foreground/60"
-                    }`}
+                    className={`relative size-5 stroke-[2.5] transition-all hover:animate-bounce ${lit.includes(dependencyChain[i + 1].id) && on ? "text-primary" : "text-muted-foreground/80"}`}
                   />
                 </div>
               )}
