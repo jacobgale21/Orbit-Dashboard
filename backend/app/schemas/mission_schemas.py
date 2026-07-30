@@ -15,3 +15,14 @@ class MissionOut(BaseModel):
     destination: str | None = None
     launch_site: str | None = None
     model_config = ConfigDict(from_attributes=True)
+
+class MissionDocument(BaseModel):
+    name: str
+    status: str
+    launch_date: datetime.datetime | None = None
+    description: str | None = None
+    agency: str | None = None
+    rocket: str | None = None
+    destination: str | None = None
+    launch_site: str | None = None
+    model_config = ConfigDict(from_attributes=True)

@@ -13,3 +13,12 @@ class DiscoveryOut(BaseModel):
     impact: str | None = None
     details: dict[str, Any] | None = None
     model_config = ConfigDict(from_attributes=True)
+
+class DiscoveryDocument(BaseModel):
+    name: str
+    subtitle: str | None = None
+    year: str | None = None
+    description: str | None = None
+    impact: str | None = None
+    details: dict[str, Any] | None = None
+    model_config = ConfigDict(from_attributes=True)

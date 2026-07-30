@@ -1,0 +1,620 @@
+[
+  {
+    "id": "leo",
+    "entityType": "milestone",
+    "title": "Low Earth Orbit Expansion",
+    "summary": "Launch becomes routine and cheap. Orbit turns from a destination into an industrial neighbourhood.",
+    "content": {
+      "timeframe": "2026 - 2035",
+      "focus": [
+        "reusable launch systems",
+        "commercial stations",
+        "satellite servicing",
+        "orbital manufacturing"
+      ]
+    },
+    "relationships": [
+      "Chemical Rockets",
+      "Water Recycling",
+      "Large Solar Farms",
+      "Space Manufacturing"
+    ]
+  },
+  {
+    "id": "chemical-rockets",
+    "entityType": "technology",
+    "title": "Chemical Rockets",
+    "summary": "Full reusability drops launch prices by an order of magnitude.",
+    "content": {
+      "category": "Propulsion",
+      "readiness": "TRL 9 Operational",
+      "progress": 96,
+      "challenge": "Cost per kilogram and turnaround cadence.",
+      "impact": "Full reusability drops launch prices by an order of magnitude."
+    },
+    "relationships": ["Low Earth Orbit Expansion"]
+  },
+  {
+    "id": "water-recycling",
+    "entityType": "technology",
+    "title": "Water Recycling",
+    "summary": "Removes the heaviest consumable from every crewed mission.",
+    "content": {
+      "category": "Life Support",
+      "readiness": "TRL 8 Flight proven",
+      "progress": 82,
+      "challenge": "Long-duration reliability without resupply.",
+      "impact": "Removes the heaviest consumable from every crewed mission."
+    },
+    "relationships": ["Low Earth Orbit Expansion"]
+  },
+  {
+    "id": "large-solar-farms",
+    "entityType": "technology",
+    "title": "Large Solar Farms",
+    "summary": "Powers orbital factories and station clusters.",
+    "content": {
+      "category": "Energy",
+      "readiness": "TRL 8",
+      "progress": 74,
+      "challenge": "Deployable structures at hundred-metre scale.",
+      "impact": "Powers orbital factories and station clusters."
+    },
+    "relationships": ["Low Earth Orbit Expansion"]
+  },
+  {
+    "id": "space-manufacturing",
+    "entityType": "technology",
+    "title": "Space Manufacturing",
+    "summary": "Fibre optics, alloys and organs made better off-world.",
+    "content": {
+      "category": "Construction",
+      "readiness": "TRL 5",
+      "progress": 41,
+      "challenge": "Microgravity process control and quality assurance.",
+      "impact": "Fibre optics, alloys and organs made better off-world."
+    },
+    "relationships": ["Low Earth Orbit Expansion"]
+  },
+  {
+    "id": "moon",
+    "entityType": "milestone",
+    "title": "Permanent Moon Presence",
+    "summary": "The Moon becomes a proving ground: habitats, water ice mining and the first off-world industry.",
+    "content": {
+      "timeframe": "2030 — 2050",
+      "focus": [
+        "lunar habitats",
+        "ISRU",
+        "mining water ice",
+        "power systems",
+        "moon bases"
+      ]
+    },
+    "relationships": [
+      "ISRU",
+      "Nuclear Fission Surface Power",
+      "Inflatable Habitats",
+      "Laser Communication"
+    ]
+  },
+  {
+    "id": "isru",
+    "entityType": "technology",
+    "title": "ISRU (In-Situ Resources)",
+    "summary": "Extracting and purifying ice in permanently shadowed craters.",
+    "content": {
+      "category": "Construction",
+      "readiness": "TRL 4",
+      "progress": 34,
+      "challenge": "Extracting and purifying ice in permanently shadowed craters.",
+      "impact": "Local propellant ends the tyranny of Earth logistics."
+    },
+    "relationships": ["Permanent Moon Presence"]
+  },
+  {
+    "id": "nuclear-fission-surface-power",
+    "entityType": "technology",
+    "title": "Nuclear Fission Surface Power",
+    "summary": "Continuous megawatt power for mining and refining.",
+    "content": {
+      "category": "Energy",
+      "readiness": "TRL 5",
+      "progress": 46,
+      "challenge": "Compact reactors that survive 14-day lunar nights.",
+      "impact": "Continuous megawatt power for mining and refining."
+    },
+    "relationships": ["Permanent Moon Presence"]
+  },
+
+  {
+    "id": "inflatable-habitats",
+    "entityType": "technology",
+    "title": "Inflatable Habitats",
+    "summary": "Large pressurised volume for a fraction of launch mass.",
+    "content": {
+      "category": "Construction",
+      "readiness": "TRL 6",
+      "progress": 52,
+      "challenge": "Regolith shielding and micrometeoroid protection.",
+      "impact": "Large pressurised volume for a fraction of launch mass."
+    },
+    "relationships": ["Permanent Moon Presence"]
+  },
+  {
+    "id": "laser-communication",
+    "entityType": "technology",
+    "title": "Laser Communication",
+    "summary": "Gigabit links between Earth and the lunar surface.",
+    "content": {
+      "category": "Communications",
+      "readiness": "TRL 7",
+      "progress": 63,
+      "challenge": "Pointing accuracy across cislunar distances.",
+      "impact": "Gigabit links between Earth and the lunar surface."
+    },
+    "relationships": ["Permanent Moon Presence"]
+  },
+  {
+    "id": "mars",
+    "entityType": "milestone",
+    "title": "Mars Exploration",
+    "summary": "First crews land, live off the land and prove that a second world can sustain people.",
+    "content": {
+      "timeframe": "2040 — 2065",
+      "focus": [
+        "first human missions",
+        "surface habitats",
+        "fuel production",
+        "food production",
+        "radiation protection"
+      ]
+    },
+    "relationships": [
+      "Nuclear Thermal Propulsion",
+      "Closed-loop Food Production",
+      "Radiation Shielding",
+      "Delay-tolerant Networking"
+    ]
+  },
+  {
+    "id": "nuclear-thermal-propulsion",
+    "entityType": "technology",
+    "title": "Nuclear Thermal Propulsion",
+    "summary": "Cuts transit time and crew radiation exposure nearly in half.",
+    "content": {
+      "category": "Propulsion",
+      "readiness": "TRL 4",
+      "progress": 30,
+      "challenge": "High-temperature fuel elements and ground testing.",
+      "impact": "Cuts transit time and crew radiation exposure nearly in half."
+    },
+    "relationships": ["Mars Exploration"]
+  },
+  {
+    "id": "closed-loop-food-production",
+    "entityType": "technology",
+    "title": "Closed-loop Food Production",
+    "summary": "Calories that do not need to be shipped from Earth.",
+    "content": {
+      "category": "Life Support",
+      "readiness": "TRL 4",
+      "progress": 28,
+      "challenge": "Crop yield stability under partial gravity and low light.",
+      "impact": "Calories that do not need to be shipped from Earth."
+    },
+    "relationships": ["Mars Exploration"]
+  },
+  {
+    "id": "radiation-shielding",
+    "entityType": "technology",
+    "title": "Radiation Shielding",
+    "summary": "Makes multi-year surface stays medically survivable.",
+    "content": {
+      "category": "Construction",
+      "readiness": "TRL 3",
+      "progress": 22,
+      "challenge": "Mass-efficient protection against galactic cosmic rays.",
+      "impact": "Makes multi-year surface stays medically survivable."
+    },
+    "relationships": ["Mars Exploration"]
+  },
+  {
+    "id": "delay-tolerant-networking",
+    "entityType": "technology",
+    "title": "Delay-tolerant Networking",
+    "summary": "An interplanetary internet that simply works.",
+    "content": {
+      "category": "Communications",
+      "readiness": "TRL 6",
+      "progress": 55,
+      "challenge": "Store-and-forward protocols across 20-minute light lag.",
+      "impact": "An interplanetary internet that simply works."
+    },
+    "relationships": ["Mars Exploration"]
+  },
+  {
+    "id": "industrial",
+    "entityType": "milestone",
+    "title": "Industrial Solar System",
+    "summary": "Robots outnumber people off-world. Asteroids feed shipyards; ships are built where they fly.",
+    "content": {
+      "timeframe": "2060 — 2100",
+      "focus": [
+        "asteroid mining",
+        "orbital shipyards",
+        "automated factories",
+        "massive solar arrays",
+        "autonomous robotics"
+      ]
+    },
+    "relationships": [
+      "Nuclear Electric Propulsion",
+      "Autonomous Construction Robots",
+      "Space-based Solar",
+      "AI Autonomy"
+    ]
+  },
+  {
+    "id": "nuclear-electric-propulsion",
+    "entityType": "technology",
+    "title": "Nuclear Electric Propulsion",
+    "summary": "Economical cargo tugs across the inner system.",
+    "content": {
+      "category": "Propulsion",
+      "readiness": "TRL 4",
+      "progress": 26,
+      "challenge": "Megawatt-class power conversion and heat rejection.",
+      "impact": "Economical cargo tugs across the inner system."
+    },
+    "relationships": ["Industrial Solar System"]
+  },
+  {
+    "id": "autonomous-construction-robots",
+    "entityType": "technology",
+    "title": "Autonomous Construction Robots",
+    "summary": "Infrastructure that builds itself before crews arrive.",
+    "content": {
+      "category": "Construction",
+      "readiness": "TRL 4",
+      "progress": 24,
+      "challenge": "Infrastructure that builds itself before crews arrive.",
+      "impact": "Infrastructure that builds itself before crews arrive."
+    },
+    "relationships": ["Industrial Solar System"]
+  },
+  {
+    "id": "space-based-solar",
+    "entityType": "technology",
+    "title": "Space-based Solar",
+    "summary": "Uninterrupted gigawatts for industry anywhere in orbit.",
+
+    "content": {
+      "category": "Energy",
+      "readiness": "TRL 4",
+      "progress": 24,
+      "challenge": "Kilometre-scale assembly and wireless power beaming.",
+      "impact": "Uninterrupted gigawatts for industry anywhere in orbit."
+    },
+
+    "relationships": ["Industrial Solar System"]
+  },
+  {
+    "id": "ai-autonomy",
+    "entityType": "technology",
+    "title": "AI Autonomy",
+    "summary": "Fleets that operate without waiting on Earth.",
+    "content": {
+      "category": "Communications",
+      "readiness": "TRL 5",
+      "progress": 44,
+      "challenge": "Trustworthy decision-making beyond real-time control.",
+      "impact": "Fleets that operate without waiting on Earth."
+    },
+    "relationships": ["Industrial Solar System"]
+  },
+  {
+    "id": "outer",
+    "entityType": "milestone",
+    "title": "Outer Solar System",
+    "summary": "Gas giants and ocean moons open up. Cryogenic worlds become field sites for life detection.",
+    "content": {
+      "timeframe": "2100+",
+      "focus": [
+        "Jupiter missions",
+        "Europa",
+        "Titan",
+        "Enceladus",
+        "cryogenic exploration"
+      ]
+    },
+    "relationships": [
+      "Fusion Propulsion",
+      "Medical Autonomy",
+      "Deep-space Networking",
+      "Fusion Power"
+    ]
+  },
+  {
+    "id": "fusion-propulsion",
+    "entityType": "technology",
+    "title": "Fusion Propulsion",
+    "summary": "Months instead of decades to the outer planets.",
+    "content": {
+      "category": "Propulsion",
+      "readiness": "TRL 2",
+      "progress": 12,
+      "challenge": "Net-positive burn in a flight-weight machine.",
+      "impact": "Months instead of decades to the outer planets."
+    },
+    "relationships": ["Outer Solar System"]
+  },
+  {
+    "id": "medical-autonomy",
+    "entityType": "technology",
+    "title": "Medical Autonomy",
+    "summary": "Surgery and pharmacy with no evacuation option.",
+    "content": {
+      "category": "Life Support",
+      "readiness": "TRL 3",
+      "progress": 21,
+      "challenge": "Surgery and pharmacy with no evacuation option.",
+      "impact": "Crews survive emergencies years from home."
+    },
+    "relationships": ["Outer Solar System"]
+  },
+  {
+    "id": "deep-space-networking",
+    "entityType": "technology",
+    "title": "Deep-space Networking",
+    "summary": "Persistent contact with the far system.",
+    "content": {
+      "category": "Communications",
+      "readiness": "TRL 5",
+      "progress": 38,
+      "challenge": "Relay architecture across billions of kilometres.",
+      "impact": "Persistent contact with the far system."
+    },
+    "relationships": ["Outer Solar System"]
+  },
+  {
+    "id": "fusion-power",
+    "entityType": "technology",
+    "title": "Fusion Power",
+    "summary": "Energy independence far from the Sun.",
+    "content": {
+      "category": "Energy",
+      "readiness": "TRL 3",
+      "progress": 18,
+      "challenge": "Sustained confinement and tritium breeding.",
+      "impact": "Energy independence far from the Sun."
+    },
+    "relationships": ["Outer Solar System"]
+  },
+  {
+    "id": "civilization",
+    "entityType": "milestone",
+    "title": "Interplanetary Civilization",
+    "summary": "Travel becomes routine, colonies become cities, and an economy spans multiple worlds.",
+    "content": {
+      "timeframe": "2200+",
+      "focus": [
+        "routine travel",
+        "thriving colonies",
+        "interplanetary economy",
+        "autonomous settlements",
+        "large rotating habitats"
+      ]
+    },
+    "relationships": [
+      "Artificial Gravity",
+      "Closed-loop Ecosystems",
+      "Orbital Shipyards",
+      "Wireless Power"
+    ]
+  },
+  {
+    "id": "artificial-gravity",
+    "entityType": "technology",
+    "title": "Artificial Gravity",
+    "summary": "Children born and raised healthily off Earth.",
+    "content": {
+      "category": "Life Support",
+      "readiness": "TRL 3",
+      "progress": 21,
+      "challenge": "Children born and raised healthily off Earth.",
+      "impact": "Children born and raised healthily off Earth."
+    },
+    "relationships": ["Interplanetary Civilization"]
+  },
+  {
+    "id": "closed-loop-ecosystems",
+    "entityType": "technology",
+    "title": "Closed-loop Ecosystems",
+    "summary": "Settlements that need nothing from Earth.",
+    "content": {
+      "category": "Life Support",
+      "readiness": "TRL 3",
+      "progress": 19,
+      "challenge": "Century-stable biological balance.",
+      "impact": "Settlements that need nothing from Earth."
+    },
+    "relationships": ["Interplanetary Civilization"]
+  },
+  {
+    "id": "orbital-shipyards",
+    "entityType": "technology",
+    "title": "Orbital Shipyards",
+    "summary": "Ships too large to ever launch from a planet.",
+    "content": {
+      "category": "Construction",
+      "readiness": "TRL 3",
+      "progress": 16,
+      "challenge": "Heavy assembly without a gravity well.",
+      "impact": "Ships too large to ever launch from a planet."
+    },
+    "relationships": ["Interplanetary Civilization"]
+  },
+  {
+    "id": "wireless-power",
+    "entityType": "technology",
+    "title": "Wireless Power",
+    "summary": "Power grids spanning orbital clusters.",
+    "content": {
+      "category": "Energy",
+      "readiness": "TRL 4",
+      "progress": 27,
+      "challenge": "Beam efficiency and safety over long ranges.",
+      "impact": "Power grids spanning orbital clusters."
+    },
+    "relationships": ["Interplanetary Civilization"]
+  },
+  {
+    "id": "beyond-the-solar-system",
+    "entityType": "milestone",
+    "title": "Beyond the Solar System",
+    "summary": "The first true departures — probes, sails, and eventually ships that never intend to come back.",
+    "content": {
+      "timeframe": "Far Future",
+      "focus": [
+        "fusion propulsion",
+        "antimatter concepts",
+        "laser sails",
+        "generation ships",
+        "interstellar probes"
+      ]
+    },
+    "relationships": [
+      "Beamed Propulsion / Laser Sails",
+      "Antimatter Concepts",
+      "Cryogenic Storage",
+      "Generation Ships"
+    ]
+  },
+  {
+    "id": "beamed-propulsion-laser-sails",
+    "entityType": "technology",
+    "title": "Beamed Propulsion / Laser Sails",
+    "summary": "Gram-scale probes at a fraction of light speed.",
+    "content": {
+      "category": "Propulsion",
+      "readiness": "TRL 2",
+      "progress": 9,
+      "challenge": "Gigawatt beam arrays and sail survivability.",
+      "impact": "Gram-scale probes at a fraction of light speed."
+    },
+    "relationships": ["Beyond the Solar System"]
+  },
+  {
+    "id": "antimatter-concepts",
+    "entityType": "technology",
+    "title": "Antimatter Concepts",
+    "summary": "The ultimate fuel for interstellar travel.",
+    "content": {
+      "category": "Propulsion",
+      "readiness": "TRL 2",
+      "progress": 9,
+      "challenge": "The ultimate fuel for interstellar travel.",
+      "impact": "The ultimate fuel for interstellar travel."
+    },
+    "relationships": ["Beyond the Solar System"]
+  },
+  {
+    "id": "cryogenic-storage",
+    "entityType": "technology",
+    "title": "Cryogenic Storage",
+    "summary": "Reversible suspension of complex organisms.",
+    "content": {
+      "category": "Life Support",
+      "readiness": "TRL 1",
+      "progress": 6,
+      "challenge": "Reversible suspension of complex organisms.",
+      "impact": "Crossing centuries without living through them."
+    },
+    "relationships": ["Beyond the Solar System"]
+  },
+  {
+    "id": "generation-ships",
+    "entityType": "technology",
+    "title": "Generation Ships",
+    "summary": "Ships that never intend to come back.",
+    "content": {
+      "category": "Construction",
+      "readiness": "TRL 2",
+      "progress": 11,
+      "challenge": "Ships that never intend to come back.",
+      "impact": "Ships that never intend to come back."
+    },
+    "relationships": ["Beyond the Solar System"]
+  },
+  {
+    "id": "economy",
+    "entityType": "futureTheory",
+    "title": "Interplanetary Economy",
+    "summary": "Trade between planets and moons.",
+    "content": {
+      "detail": "Volatiles from the outer system, metals from asteroids, and manufactured goods from orbit create the first market that spans worlds — priced in delta-v as much as currency."
+    },
+    "relationships": ["Interplanetary Civilization"]
+  },
+  {
+    "id": "elevator",
+    "entityType": "futureTheory",
+    "title": "Space Elevators",
+    "summary": "Massive launch infrastructure.",
+    "content": {
+      "detail": "A tether from the surface to beyond geostationary orbit turns launch into an elevator ride. Feasible on the Moon and Mars long before Earth."
+    },
+    "relationships": ["Interplanetary Civilization"]
+  },
+  {
+    "id": "cities",
+    "entityType": "futureTheory",
+    "title": "Orbital Cities",
+    "summary": "O'Neill Cylinders and rotating habitats.",
+    "content": {
+      "detail": "Kilometres-long spinning cylinders with rivers, weather and full gravity — homes designed rather than inherited."
+    },
+    "relationships": ["Interplanetary Civilization", "Beyond the Solar System"]
+  },
+  {
+    "id": "terraform",
+    "entityType": "futureTheory",
+    "title": "Terraforming",
+    "summary": "Long-term planetary engineering.",
+    "content": {
+      "detail": "Thickening atmospheres, warming surfaces and seeding biospheres across centuries. The slowest and most ambitious project imaginable."
+    },
+    "relationships": ["Interplanetary Civilization", "Beyond the Solar System"]
+  },
+  {
+    "id": "ai",
+    "entityType": "futureTheory",
+    "title": "AI Civilization",
+    "summary": "Robotic construction throughout the Solar System.",
+    "content": {
+      "detail": "Self-replicating machine fleets prospect, refine and build for decades before a single human arrives."
+    },
+    "relationships": ["Industrial Solar System"]
+  },
+  {
+    "id": "dyson",
+    "entityType": "futureTheory",
+    "title": "Dyson Swarm",
+    "summary": "Large-scale solar energy collection.",
+    "content": {
+      "detail": "Millions of independent collectors orbiting the Sun, harvesting a growing fraction of its output for a civilization with no energy ceiling."
+    },
+    "relationships": ["Interplanetary Civilization"]
+  },
+  {
+    "id": "interstellar",
+    "entityType": "futureTheory",
+    "title": "Interstellar Exploration",
+    "summary": "Probes, then people, beyond our Solar System.",
+    "content": {
+      "detail": "Laser-driven sails reach nearby stars within a human lifetime; crewed ships follow only once we can carry an ecosystem with us."
+    },
+    "relationships": ["Beyond the Solar System"]
+  }
+]

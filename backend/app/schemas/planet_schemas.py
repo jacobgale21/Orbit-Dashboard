@@ -42,6 +42,24 @@ class OrbitData(BaseModel):
     long: float | None = None
     model_config = ConfigDict(from_attributes=True)
 
+class StructureDocument(BaseModel):
+    name: str
+    mass: dict | None = None
+    volume: dict | None = None
+    gravity: float | None = None
+    escape: float | None = None
+    temperature: float | None = None
+    period: float | None = None
+    distance: float | None = None
+    type_planet: str | None = None
+    tagline: str | None = None
+    fact: str | None = None
+    radius: float | None = None
+    semimajoraxis: float | None = None
+    eccentricity: float | None = None
+    inclination: float | None = None
+    model_config = ConfigDict(from_attributes=True)
+
 class MoonData(BaseModel):
     id: uuid.UUID
     name: str
