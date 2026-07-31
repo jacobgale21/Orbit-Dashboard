@@ -13,6 +13,7 @@ from app.schemas.mission_schemas import MissionDocument
 from app.models.discovery_model import Discovery
 from app.schemas.discovery_schemas import DiscoveryDocument
 import asyncio
+from sqlalchemy.ext.asyncio import AsyncSession
 
 def create_technology_chunks() -> List[Chunk]:
     chunks = []
@@ -43,31 +44,28 @@ def create_future_theory_chunks() -> List[Chunk]:
             chunks.append(Chunk(source_type="future_theory", source_id=entity["id"], path="/future", title=entity["title"], content=document))
     return chunks
 
-async def create_structures_chunks() -> List[Chunk]:
+async def create_structures_chunks(session: AsyncSession) -> List[Chunk]:
     chunks = []
-    async with SessionLocal() as session:
-        structures = (await session.execute(select(Structure))).scalars().all()
-        for entity in structures:
-            document = structures_to_documents(StructureDocument.model_validate(entity))
-            chunks.append(Chunk(source_type="structure", source_id=entity.id, path="destinations", title=entity.name, content=document))
+    structures = (await session.execute(select(Structure))).scalars().all()
+    for entity in structures:
+        document = structures_to_documents(StructureDocument.model_validate(entity))
+        chunks.append(Chunk(source_type="structure", source_id=entity.id, path="destinations", title=entity.name, content=document))
     return chunks
 
-async def create_missions_chunks() -> List[Chunk]:
+async def create_missions_chunks(session: AsyncSession) -> List[Chunk]:
     chunks = []
-    async with SessionLocal() as session:
-        missions = (await session.execute(select(Mission))).scalars().all()
-        for entity in missions:
-            document = missions_to_documents(MissionDocument.model_validate(entity))
-            chunks.append(Chunk(source_type="mission", source_id=entity.id, path="missions", title=entity.name, content=document))
+    missions = (await session.execute(select(Mission))).scalars().all()
+    for entity in missions:
+        document = missions_to_documents(MissionDocument.model_validate(entity))
+        chunks.append(Chunk(source_type="mission", source_id=entity.id, path="missions", title=entity.name, content=document))
     return chunks
 
-async def create_discoveries_chunks() -> List[Chunk]:
+async def create_discoveries_chunks(session: AsyncSession) -> List[Chunk]:
     chunks = []
-    async with SessionLocal() as session:
-        discoveries = (await session.execute(select(Discovery))).scalars().all()
-        for entity in discoveries:
-            document = discoveries_to_documents(DiscoveryDocument.model_validate(entity))
-            chunks.append(Chunk(source_type="discovery", source_id=entity.id, path="discoveries", title=entity.name, content=document))
+    discoveries = (await session.execute(select(Discovery))).scalars().all()
+    for entity in discoveries:
+        document = discoveries_to_documents(DiscoveryDocument.model_validate(entity))
+        chunks.append(Chunk(source_type="discovery", source_id=entity.id, path="discoveries", title=entity.name, content=document))
     return chunks
 
 # if __name__ == "__main__":

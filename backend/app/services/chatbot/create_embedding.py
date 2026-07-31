@@ -11,6 +11,10 @@ import hashlib
 import sqlalchemy as sa
 from sqlalchemy.dialects.postgresql import insert
 import asyncio
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.database import get_db
+from fastapi import Depends
+from sqlalchemy import select
 
 load_dotenv()
 
@@ -78,15 +82,14 @@ async def upsert_chunk(session, chunk: Chunk, vector: list[float]):
     )
     await session.execute(stmt)
 
-async def ingest_knowledge():
-    async with SessionLocal() as session:
-        async for chunk, vec in create_embeddings():
-            await upsert_chunk(session, chunk, vec)
-        await session.commit()
+async def ingest_knowledge(db: AsyncSession = Depends(get_db)):
+    async for chunk, vec in create_embeddings(db):
+        await upsert_chunk(db, chunk, vec)
+    await db.commit()
 
-async def search_chunks(session, query: str, k: int = 5):
+async def search_chunks(db: AsyncSession = Depends(get_db), query: str, k: int = 5):
     qvec = embed_query(query)
-    result = await session.execute(
+    result = await db.execute(
         select(KnowledgeChunk)
         .order_by(KnowledgeChunk.embedding.cosine_distance(qvec))
         .limit(k)
