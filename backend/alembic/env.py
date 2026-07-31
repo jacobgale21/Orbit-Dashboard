@@ -11,6 +11,7 @@ from app.models.user_models import User
 from app.models.structure_model import Structure
 from app.models.mission_model import Mission
 from app.models.discovery_model import Discovery
+from app.models.knowledge_chunk_model import KnowledgeChunk
 load_dotenv()
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.

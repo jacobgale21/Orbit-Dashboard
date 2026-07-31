@@ -55,22 +55,20 @@ async def create_structures_chunks() -> List[Chunk]:
 async def create_missions_chunks() -> List[Chunk]:
     chunks = []
     async with SessionLocal() as session:
-        missions = await session.execute(select(Mission))
+        missions = (await session.execute(select(Mission))).scalars().all()
         for entity in missions:
-            document = missions_to_documents(MissionDocument.model_validate(entity.scalar_one()))
+            document = missions_to_documents(MissionDocument.model_validate(entity))
             chunks.append(Chunk(source_type="mission", source_id=entity.id, path="missions", title=entity.name, content=document))
     return chunks
 
 async def create_discoveries_chunks() -> List[Chunk]:
     chunks = []
     async with SessionLocal() as session:
-        discoveries = await session.execute(select(Discovery))
+        discoveries = (await session.execute(select(Discovery))).scalars().all()
         for entity in discoveries:
-            print(entity)
-            print(entity.scalar_one())
-            document = discoveries_to_documents(DiscoveryDocument.model_validate(entity.scalar_one()))
+            document = discoveries_to_documents(DiscoveryDocument.model_validate(entity))
             chunks.append(Chunk(source_type="discovery", source_id=entity.id, path="discoveries", title=entity.name, content=document))
     return chunks
 
-if __name__ == "__main__":
-    print(json.dumps([chunk.to_dict() for chunk in asyncio.run(create_structures_chunks())], indent=4))
+# if __name__ == "__main__":
+#     print(json.dumps([chunk.to_dict() for chunk in asyncio.run(create_structures_chunks())], indent=4))
