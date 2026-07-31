@@ -1,16 +1,14 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import type { Mission } from "@/api";
-import { getMissions } from "@/api";
-import { useState, useEffect } from "react";
+import { useMissions } from "@/hooks/useCatalog";
 
 export default function CurrentMissions() {
-  const [missions, setMissions] = useState<Mission[]>([]);
-  useEffect(() => {
-    getMissions().then((missions) => {
-      setMissions(missions);
-    });
-  }, []);
+  const { data: missions = [], isPending, isError, error } = useMissions();
+  if (isPending)
+    return <p className="text-center text-slate-400">Loading missions…</p>;
+  if (isError)
+    return <p className="text-center text-red-300">{error.message}</p>;
   return (
     <section className="relative overflow-hidden bg-transparent py-16 text-slate-100 sm:py-24">
       <div className="pointer-events-none absolute inset-0 opacity-60"></div>

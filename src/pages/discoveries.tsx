@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getDiscoveries, type Discovery } from "@/api";
-import { useEffect, useState } from "react";
+import { useDiscoveries } from "@/hooks/useCatalog";
+import type { Discovery } from "@/api";
 import {
   Shield,
   Wind,
@@ -20,12 +20,16 @@ const ICONS: Record<string, LucideIcon> = {
 };
 
 export default function Discoveries() {
-  const [discoveries, setDiscoveries] = useState<Discovery[]>([]);
-  useEffect(() => {
-    getDiscoveries().then((data) => {
-      setDiscoveries(data);
-    });
-  }, []);
+  const {
+    data: discoveries = [],
+    isPending,
+    isError,
+    error,
+  } = useDiscoveries();
+  if (isPending)
+    return <p className="text-center text-slate-400">Loading discoveries…</p>;
+  if (isError)
+    return <p className="text-center text-red-300">{error.message}</p>;
   return (
     <section
       id="discoveries"

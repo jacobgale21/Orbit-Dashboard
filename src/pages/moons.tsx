@@ -1,8 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
-import { getMoonData } from "@/api";
-import { useEffect, useState } from "react";
+import { useMoons } from "@/hooks/useCatalog";
 import type { MoonData } from "@/api";
 import { LazyPlanetViewer } from "@/components/globe";
 
@@ -20,12 +18,11 @@ function convertToCelsius(temperature: number) {
   return Math.round(temperature - 273.15);
 }
 export default function Moons() {
-  const [moons, setMoons] = useState<MoonData[]>([]);
-
-  useEffect(() => {
-    getMoonData().then(setMoons);
-  }, []);
-
+  const { data: moons = [], isPending, isError, error } = useMoons();
+  if (isPending)
+    return <p className="text-center text-slate-400">Loading moons…</p>;
+  if (isError)
+    return <p className="text-center text-red-300">{error.message}</p>;
   return (
     <section id="moons" className="relative overflow-hidden text-slate-100">
       <div className="relative mx-auto max-w-7xl px-6 py-20 sm:py-28">

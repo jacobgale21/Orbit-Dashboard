@@ -2,7 +2,6 @@
 import { Link } from "react-router-dom";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
 const nav = [
   { label: "Missions", href: "#missions" },
   { label: "Timeline", href: "#timeline" },
@@ -24,13 +23,13 @@ export default function SiteNavbar() {
 
         <nav className="hidden items-center gap-8 text-sm text-white/70 md:flex">
           {nav.map((item) => (
-            <a
+            <Link
               key={item.href}
-              href={item.href}
+              to={item.href}
               className="transition hover:text-white"
             >
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 

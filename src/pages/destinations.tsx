@@ -1,8 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-
-import { getStructures } from "@/api";
-import { useEffect, useState } from "react";
+import { useStructures } from "@/hooks/useCatalog";
 import type { Structure } from "@/api";
 import { LazyPlanetViewer } from "@/components/globe";
 
@@ -21,11 +19,11 @@ function formatVolume(structure: Structure) {
 }
 
 export default function Destinations() {
-  const [structures, setStructures] = useState<Structure[]>([]);
-
-  useEffect(() => {
-    getStructures().then(setStructures);
-  }, []);
+  const { data: structures = [], isPending, isError, error } = useStructures();
+  if (isPending)
+    return <p className="text-center text-slate-400">Loading missions…</p>;
+  if (isError)
+    return <p className="text-center text-red-300">{error.message}</p>;
 
   return (
     <section

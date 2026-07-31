@@ -9,6 +9,7 @@ import {
 } from "../api";
 import { useState, useEffect } from "react";
 import type { MapView } from "../pages/simulator";
+import { useMoons, useOrbitData } from "@/hooks/useCatalog";
 
 const SYSTEM_RADIUS_SCALE = 1 / 25000;
 const SUBSYSTEM_RADIUS_SCALE = 1 / 4000;
@@ -177,18 +178,8 @@ export function SolarMapCanvas({
   tDays: number;
   onSelectParent?: (name: "Earth" | "Jupiter" | "Saturn") => void;
 }) {
-  const [orbitData, setOrbitData] = useState<OrbitData[]>([]);
-  useEffect(() => {
-    getOrbitData().then((data) => {
-      setOrbitData(data);
-    });
-  }, []);
-  const [moonData, setMoonData] = useState<MoonData[]>([]);
-  useEffect(() => {
-    getMoonData().then((data) => {
-      setMoonData(data);
-    });
-  }, []);
+  const { data: orbitData = [] } = useOrbitData();
+  const { data: moonData = [] } = useMoons();
   return (
     <div className="h-full w-full">
       <Canvas
