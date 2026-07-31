@@ -28,6 +28,7 @@ def test_future_theory_to_document():
             document = future_theory_to_document(entity)
             print(document)
             break
+
 def test_roadblock_to_document():
     with open( "./app/data/chatbot/roadblock.json") as f:
         roadblock = json.load(f)
@@ -65,4 +66,9 @@ async def test_discoveries_to_documents(name: str):
         raise Exception(f"Error getting discovery: {e}")
 
 if __name__ == "__main__":
-    print(asyncio.run(test_discoveries_to_documents("Heliospheric Cosmic Rays")))
+    # print(asyncio.run(test_discoveries_to_documents("Heliospheric Cosmic Rays")))
+    # print(asyncio.run(test_structures_to_documents("Moon")))
+    # print(asyncio.run(test_missions_to_documents("Apollo 11")))
+    # print(test_technology_to_document())
+    # print(test_future_theory_to_document())
+    # print(test_roadblock_to_document())
