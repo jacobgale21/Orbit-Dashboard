@@ -10,6 +10,7 @@ import Future from "./pages/future";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Chatbot from "./components/chat/chatbot";
+import { DependencyGraph } from "./pages/dependencyGraph";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -32,6 +33,7 @@ createRoot(document.getElementById("app")!).render(
           <Route path="/simulator" element={<Simulator />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/future" element={<Future />} />
+          <Route path="/graph" element={<DependencyGraph />} />
         </Routes>
         <Chatbot />
       </BrowserRouter>
