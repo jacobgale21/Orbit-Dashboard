@@ -34,19 +34,25 @@ export default function ChatbotPanel() {
     try {
       const response = await getChatbotResponse(text);
 
-      if (response.type_of_response === "route") {
-        navigate(response.path || "/");
-      } else if (response.type_of_response === "scroll") {
-        document.getElementById(response.path || "")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-
       setMessages((m) => [
         ...m,
         { role: "assistant", text: response.response },
       ]);
+      const sectionId = response.path || "";
+      if (response.type_of_response === "route") {
+        navigate(sectionId);
+      } else if (response.type_of_response === "scroll") {
+        if (location.pathname === "/") {
+          document.getElementById(sectionId)?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        } else {
+          // go home with hash — dashboard scrolls when it mounts
+          console.log("going home with hash", sectionId);
+          navigate({ pathname: "/", hash: sectionId });
+        }
+      }
     } catch {
       setMessages((m) => [
         ...m,

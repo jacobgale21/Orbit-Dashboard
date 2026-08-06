@@ -6,7 +6,6 @@ import { FutureTheoryCard } from "../components/future/FutureTheoryCard";
 import { TechnologyGapCard } from "../components/future/TechnologyGapCard";
 import { futureTheories, technologyGaps } from "@/data/roadmap";
 import SiteNavbar from "../components/navBar";
-import Chatbot from "../components/chat/chatbot";
 function SectionHeading({
   eyebrow,
   title,
@@ -105,7 +104,6 @@ export default function Future() {
           Built for the next two hundred years.
         </footer>
       </main>
-      <Chatbot />
     </div>
   );
 }

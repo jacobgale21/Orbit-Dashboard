@@ -8,20 +8,23 @@ import CurrentMissions from "./currentMissions";
 import Discoveries from "./discoveries";
 import Destinations from "./destinations";
 import Moons from "./moons";
-import Chatbot from "../components/chat/chatbot";
+import { useLocation } from "react-router-dom";
 
 export default function Dashboard() {
   const [error, setError] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const location = useLocation();
   useEffect(() => {
     const id = location.hash.replace(/^#/, "");
     if (!id) return;
-    requestAnimationFrame(() => {
-      document
-        .getElementById(id)
-        ?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }, [location.hash]);
+    const t = window.setTimeout(() => {
+      document.getElementById(id)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 100); // let sections paint / data load
+    return () => clearTimeout(t);
+  }, [location.hash, location.pathname]);
   // useEffect(() => {
   //   getCurrentUser()
   //     .then(setCurrentUser)
@@ -66,7 +69,6 @@ export default function Dashboard() {
           <Moons />
         </div>
       </main>
-      <Chatbot />
     </div>
   );
 }

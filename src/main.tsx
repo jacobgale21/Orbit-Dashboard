@@ -9,7 +9,7 @@ import { MapPage } from "./pages/map";
 import Future from "./pages/future";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
+import Chatbot from "./components/chat/chatbot";
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -33,6 +33,7 @@ createRoot(document.getElementById("app")!).render(
           <Route path="/map" element={<MapPage />} />
           <Route path="/future" element={<Future />} />
         </Routes>
+        <Chatbot />
       </BrowserRouter>
     </GoogleOAuthProvider>
   </QueryClientProvider>,
