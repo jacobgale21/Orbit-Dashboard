@@ -15,7 +15,15 @@ export default function Dashboard() {
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
-
+  useEffect(() => {
+    const id = location.hash.replace(/^#/, "");
+    if (!id) return;
+    requestAnimationFrame(() => {
+      document
+        .getElementById(id)
+        ?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [location.hash]);
   // useEffect(() => {
   //   getCurrentUser()
   //     .then(setCurrentUser)
