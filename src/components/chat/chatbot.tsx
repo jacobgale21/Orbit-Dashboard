@@ -20,31 +20,44 @@ export default function ChatbotPanel() {
   const [hasMessages, setHasMessages] = useState(false);
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   async function send() {
     const text = input.trim();
-    if (!text) return;
-    console.log(text);
-    const response = await getChatbotResponse(text);
-    console.log(response);
-    if (response.type_of_response === "route") {
-      navigate(response.path || "/");
-    } else if (response.type_of_response === "scroll") {
-      document.getElementById(response.path || "")?.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-    setMessages((m) => [...m, { role: "user", text }]);
-    setHasMessages(true);
+    if (!text || isLoading) return;
+
     setInput("");
-    // placeholder until backend exists
-    setMessages((m) => [
-      ...m,
-      {
-        role: "assistant",
-        text: response.response,
-      },
-    ]);
+    setHasMessages(true);
+    setMessages((m) => [...m, { role: "user", text }]);
+    setIsLoading(true);
+
+    try {
+      const response = await getChatbotResponse(text);
+
+      if (response.type_of_response === "route") {
+        navigate(response.path || "/");
+      } else if (response.type_of_response === "scroll") {
+        document.getElementById(response.path || "")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+
+      setMessages((m) => [
+        ...m,
+        { role: "assistant", text: response.response },
+      ]);
+    } catch {
+      setMessages((m) => [
+        ...m,
+        {
+          role: "assistant",
+          text: "Something went wrong. Please try again.",
+        },
+      ]);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (
@@ -103,18 +116,31 @@ export default function ChatbotPanel() {
 
         <div className="flex-1 space-y-3 overflow-y-auto px-4 py-4">
           {hasMessages ? (
-            messages.map((msg, i) => (
-              <div
-                key={i}
-                className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm ${
-                  msg.role === "user"
-                    ? "ml-auto bg-sky-500/20 text-sky-100"
-                    : "bg-white/5 text-slate-200"
-                }`}
-              >
-                {msg.text}
-              </div>
-            ))
+            <>
+              {messages.map((msg, i) => (
+                <div
+                  key={i}
+                  className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm ${
+                    msg.role === "user"
+                      ? "ml-auto bg-sky-500/20 text-sky-100"
+                      : "bg-white/5 text-slate-200"
+                  }`}
+                >
+                  {msg.text}
+                </div>
+              ))}
+
+              {isLoading && (
+                <div
+                  className="flex max-w-[85%] items-center gap-1 rounded-2xl bg-white/5 px-4 py-3"
+                  aria-label="Assistant is thinking"
+                >
+                  <span className="size-2 animate-bounce rounded-full bg-slate-400 [animation-delay:0ms]" />
+                  <span className="size-2 animate-bounce rounded-full bg-slate-400 [animation-delay:150ms]" />
+                  <span className="size-2 animate-bounce rounded-full bg-slate-400 [animation-delay:300ms]" />
+                </div>
+              )}
+            </>
           ) : (
             <SuggestedPrompts />
           )}
@@ -128,6 +154,7 @@ export default function ChatbotPanel() {
           }}
         >
           <input
+            disabled={isLoading}
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask a question…"

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { getCurrentUser, type User } from "../api";
 import NavBar from "../components/navBar";
 import HeroSection from "./hero";
@@ -12,7 +11,6 @@ import Moons from "./moons";
 import Chatbot from "../components/chat/chatbot";
 
 export default function Dashboard() {
-  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   useEffect(() => {
