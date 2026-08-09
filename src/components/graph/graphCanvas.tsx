@@ -29,7 +29,12 @@ type SimLink = Relationship & {
 };
 const cx = window.innerWidth / 2;
 const cy = window.innerHeight / 2;
-const centers = specCenters(SPECS, cx, cy, 100);
+const centers = specCenters(
+  SPECS,
+  cx,
+  cy,
+  Math.min(window.innerWidth, window.innerHeight) * 0.35,
+);
 
 const nodes: SimNode[] = COMPANIES.map((c, i) => {
   const center = centers.get(c.spec)!;
