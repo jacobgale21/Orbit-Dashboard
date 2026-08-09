@@ -33,7 +33,7 @@ const centers = specCenters(
   SPECS,
   cx,
   cy,
-  Math.min(window.innerWidth, window.innerHeight) * 0.35,
+  Math.min(window.innerWidth, window.innerHeight) * 0.3,
 );
 
 const nodes: SimNode[] = COMPANIES.map((c, i) => {
@@ -96,7 +96,7 @@ export function GraphCanvas() {
           .distance(75),
       )
       .force("charge", forceManyBody().strength(-800))
-      .force("center", forceCenter(cx, cy))
+      .force("center", forceCenter(cx, cy + cy * 0.1))
       .force(
         "collide",
         forceCollide()
