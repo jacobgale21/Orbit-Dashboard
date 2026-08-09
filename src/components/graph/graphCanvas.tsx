@@ -7,6 +7,7 @@ import {
   REL_COLORS,
   type Company,
   type Relationship,
+  type Specialization,
 } from "@/data/graphdata";
 
 import {
@@ -15,6 +16,8 @@ import {
   forceManyBody,
   forceCenter,
   forceCollide,
+  forceX,
+  forceY,
 } from "d3-force";
 import { drag } from "d3-drag";
 import { select } from "d3-selection";
@@ -24,18 +27,45 @@ type SimLink = Relationship & {
   source: string | SimNode;
   target: string | SimNode;
 };
+const cx = window.innerWidth / 2;
+const cy = window.innerHeight / 2;
+const centers = specCenters(SPECS, cx, cy, 100);
 
-const nodes: SimNode[] = COMPANIES.map((c) => ({
-  ...c,
-  x: 0,
-  y: 0,
-}));
-console.log(nodes);
+const nodes: SimNode[] = COMPANIES.map((c, i) => {
+  const center = centers.get(c.spec)!;
+  // small jitter so majors/minors in the same spec aren't stacked
+  const jitter = 40;
+  const angle = Math.random() * Math.PI * 2;
+  const r = Math.random() * jitter;
+  return {
+    ...c,
+    x: center.x + Math.cos(angle) * r,
+    y: center.y + Math.sin(angle) * r,
+  };
+});
+
 const nodeById = new Map(nodes.map((n) => [n.id, n]));
 
 const links: SimLink[] = RELATIONSHIPS.filter(
   (r) => nodeById.has(r.source) && nodeById.has(r.target),
 );
+
+function specCenters(
+  specs: Specialization[],
+  cx: number,
+  cy: number,
+  ringRadius: number,
+) {
+  const centers = new Map<Specialization, { x: number; y: number }>();
+  specs.forEach((spec, i) => {
+    const a = (i / specs.length) * Math.PI * 2 - Math.PI / 2;
+    centers.set(spec, {
+      x: cx + Math.cos(a) * ringRadius,
+      y: cy + Math.sin(a) * ringRadius,
+    });
+  });
+  return centers;
+}
 
 const radius = (c: Company) => (c.major ? 22 : 12);
 
@@ -47,6 +77,7 @@ export function GraphCanvas() {
   const simRef = useRef<ReturnType<typeof forceSimulation<SimNode>> | null>(
     null,
   );
+
   useEffect(() => {
     const svg = svgRef.current;
     if (!svg || animatedNodes.length === 0) return;
@@ -57,22 +88,20 @@ export function GraphCanvas() {
         "link",
         forceLink(animatedLinks)
           .id((d: any) => d.id)
-          .distance(120),
+          .distance(75),
       )
-      .force("charge", forceManyBody().strength(-180))
-      .force(
-        "center",
-        forceCenter(window.innerWidth / 2, window.innerHeight / 2),
-      )
+      .force("charge", forceManyBody().strength(-800))
+      .force("center", forceCenter(cx, cy))
       .force(
         "collide",
-        forceCollide().radius((d: any) => radius(d) + 6),
+        forceCollide()
+          .radius((d: any) => radius(d) + 2)
+          .iterations(4),
       )
+      .force("x", forceX<SimNode>((d) => centers.get(d.spec)!.x).strength(1.0))
+      .force("y", forceY<SimNode>((d) => centers.get(d.spec)!.y).strength(1.0))
       .on("tick", () => {
-        // FIX: Force fresh references straight out of the simulation engine
         setAnimatedNodes([...sim.nodes()]);
-
-        // If links are updating, fetch them fresh from the force layout block too
         const linkForce = sim.force<any>("link");
         if (linkForce) {
           setAnimatedLinks([...linkForce.links()]);
